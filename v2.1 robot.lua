@@ -55,7 +55,7 @@ local function TeleportToDestination(destination)
 
 
         -- Hitungan mundur 1 menit
-    local countdownTime = 45 -- 1 menit dalam detik
+    local countdownTime = 20 -- 1 menit dalam detik
     repeat
         -- SendMessage("Teleportasi selesai dalam " .. countdownTime .. " detik.")
         wait(1)
