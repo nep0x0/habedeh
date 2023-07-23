@@ -102,7 +102,7 @@ local function toPalimanan()
     -- local countdownTime = 60 -- 1 menit dalam detik
 
     -- Lakukan teleportasi ke lokasi Palimanan
-    TeleportToDestination(Vector3.new(-13001.578, 1058.455, -16360.201))
+    TeleportToDestination(Vector3.new(-12959, 1057, -16319))
 
     -- -- Tunggu hitungan mundur
     -- repeat
@@ -119,7 +119,7 @@ local function toCirebon()
     -- local countdownTime = 60 -- 1 menit dalam detik
 
     -- Lakukan teleportasi ke lokasi Cirebon
-    TeleportToDestination(Vector3.new(-21803.887, 1046.989, -27817.059))
+    TeleportToDestination(Vector3.new(-21774, 1048, -27773))
 
     -- -- Tunggu hitungan mundur
     -- repeat
@@ -136,7 +136,7 @@ local function toKM279()
     -- local countdownTime = 60 -- 1 menit dalam detik
 
     -- Lakukan teleportasi ke lokasi KM279
-    TeleportToDestination(Vector3.new(-25910.939, 1059.604, -43896.273))
+    TeleportToDestination(Vector3.new(-25871, 1055, -43846))
 
     -- -- Tunggu hitungan mundur
     -- repeat
@@ -153,7 +153,7 @@ local function toPekalongan()
     -- local countdownTime = 60 -- 1 menit dalam detik
 
     -- Lakukan teleportasi ke lokasi Pekalongan
-    TeleportToDestination(Vector3.new(-38720.934, 1018.218, -62491.059))
+    TeleportToDestination(Vector3.new(-38685, 1018, -62449))
 
     -- -- Tunggu hitungan mundur
     -- repeat
@@ -170,7 +170,7 @@ local function toSemarang()
     -- local countdownTime = 60 -- 1 menit dalam detik
 
     -- Lakukan teleportasi ke lokasi Semarang
-    TeleportToDestination(Vector3.new(-50889.66, 1017.867, -86514.797))
+    TeleportToDestination(Vector3.new(-50858, 1018, -86462))
 
     -- -- Tunggu hitungan mundur
     -- repeat
