@@ -192,16 +192,51 @@ OtherSection:AddToggle({
 local isAntiAFKEnabled = false -- Variable untuk mengetahui apakah "Anti AFK" diaktifkan
 
 local function enableAntiAFK()
-    local button = game:GetService("Players").LocalPlayer.PlayerGui.Main.Container.Hub.Radio.Frame.TextButton -- path to button here
+    --// Cache
 
-    local events = {"MouseButton1Click", "MouseButton1Down", "Activated", "MouseButton1Up"}
-    while isAntiAFKEnabled do
-        for i, v in pairs(events) do
-            for i, connection in pairs(getconnections(button[v])) do
-                connection:Fire()
+    local getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, stringlower = getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, string.lower
+
+    --// Loaded check
+
+    if getgenv().ED_AntiKick then return end
+
+    --// Variables
+
+    local Players, StarterGui, OldNamecall = game:GetService("Players"), game:GetService("StarterGui")
+
+    --// Global Variables
+
+    getgenv().ED_AntiKick = {
+        SendNotifications = true, -- Set to true if you want to get notified for every event
+        CheckCaller = false -- Set to true if you want to disable kicking by other executed scripts
+    }
+
+    --// Main
+
+    OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
+        if (getgenv().ED_AntiKick.CheckCaller and not checkcaller() or true) and stringlower(getnamecallmethod()) == "kick" then
+            if getgenv().ED_AntiKick.SendNotifications then
+                StarterGui:SetCore("SendNotification", {
+                    Title = "Exunys Developer",
+                    Text = "The script has successfully intercepted an attempted kick.",
+                    Icon = "rbxassetid://6238540373",
+                    Duration = 2,
+                })
             end
+
+            return nil
         end
-        wait(60) -- Menunggu selama 60 detik sebelum tombol ditekan kembali
+
+        return OldNamecall(...)
+    end))
+
+    if getgenv().ED_AntiKick.SendNotifications then
+        StarterGui:SetCore("SendNotification", {
+            Title = "Exunys Developer",
+            Text = "Anti-Kick script loaded!",
+            Icon = "rbxassetid://6238537240",
+            Duration = 3,
+        })
     end
 end
 
