@@ -14,64 +14,25 @@ Icon = <string> - URL to the image you want displayed on the window.
 CloseCallback = <function> - Function to execute when the window is closed.
 ]]
 
-
--- player tab
-
-local PlayerTab = Window:MakeTab({
- Name = "Player",
- Icon = "rbxassetid://4483345998",
- PremiumOnly = false
+local Tab = Window:MakeTab({
+	Name = "Tab 1",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
 
-local Section = PlayerTab:AddSection({
- Name = "Movement"
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
+
+
+local Section = Tab:AddSection({
+	Name = "Section"
 })
 
-PlayerTab:AddSlider({
- Name = "Walkspeed",
- Min = 16,
- Max = 500,
- Default = 16,
- Color = Color3.fromRGB(255,255,255),
- Increment = 1,
- ValueName = "WS",
- Callback = function(Value)
-  game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
- end    
-})
-
-PlayerTab:AddSlider({
- Name = "Jump Height",
- Min = 16,
- Max = 500,
- Default = 5,
- Color = Color3.fromRGB(255,255,255),
- Increment = 1,
- ValueName = "Height",
- Callback = function(Value)
-  game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
- end    
-})
+--[[
+Name = <string> - The name of the section.
+]]
 
 
---other tab
-
-local OtherTab = Window:MakeTab({
- Name = "Other",
- Icon = "rbxassetid://4483345998",
- PremiumOnly = false
-})
-
-local Section = OtherTab:AddSection({
- Name = "Other"
-})
-
-
-OtherTab:AddButton({
- Name = "Delete Doors",
- Callback = function()
-       game.Workspace.Doors:Destroy()
-   end    
-})
-
-OrionLib:Init()
