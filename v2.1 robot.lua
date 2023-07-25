@@ -87,8 +87,8 @@ local function TeleportToDestination(destination)
     wait(2)
     doJump()
     -- Pesan setelah hitungan mundur selesai
-    wait(35)
-    SendMessage(".")
+    wait(32)
+    SendMessage("***")
     
 end
 
