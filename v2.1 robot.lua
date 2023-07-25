@@ -15,6 +15,17 @@ local function getInTheCar()
         wait(1)
 end
 
+local function driveTheCar()
+        local vim = game:GetService('VirtualInputManager')
+        vim:SendKeyEvent(true, 'P', false, game)
+        wait(1)
+        vim:SendKeyEvent(true, 'P', false, game)
+        wait(0.5)
+        vim:SendKeyEvent(true, 'W', false, game)
+        wait(2)
+        vim:SendKeyEvent(true, 'W', false, game)
+end
+
 --- message function---
 -----------------------
 
@@ -63,7 +74,7 @@ local function TeleportToDestination(destination)
 
     Character.Parent = workspace
 
-
+    
         -- Hitungan mundur 1 menit
     local countdownTime = 20 -- 1 menit dalam detik
     repeat
@@ -71,7 +82,8 @@ local function TeleportToDestination(destination)
         wait(1)
         countdownTime = countdownTime - 1
     until countdownTime <= 0
-
+    driveTheCar()
+    wait(2)
     -- Pesan setelah hitungan mundur selesai
     SendMessage(".")
     doJump()
