@@ -63,7 +63,7 @@ local function TeleportToDestination(destination)
     until countdownTime <= 0
 
     -- Pesan setelah hitungan mundur selesai
-    SendMessage("Sudah ready!")
+    SendMessage(".")
     doJump()
 end
 
@@ -111,7 +111,7 @@ local function toPalimanan()
     -- until countdownTime <= 0
 
     -- -- Setelah hitungan mundur selesai, kirim pesan "Teleportasi sudah ready!"
-    -- SendMessage("Teleportasi sudah ready!")
+    -- SendMessage(".")
 end
 
 -- Fungsi Teleport ke Cirebon
@@ -128,7 +128,7 @@ local function toCirebon()
     -- until countdownTime <= 0
 
     -- -- Setelah hitungan mundur selesai, kirim pesan "Teleportasi sudah ready!"
-    -- SendMessage("Teleportasi sudah ready!")
+    -- SendMessage(".")
 end
 
 -- Fungsi Teleport ke KM279
@@ -145,7 +145,7 @@ local function toKM279()
     -- until countdownTime <= 0
 
     -- -- Setelah hitungan mundur selesai, kirim pesan "Teleportasi sudah ready!"
-    -- SendMessage("Teleportasi sudah ready!")
+    -- SendMessage(".")
 end
 
 -- Fungsi Teleport ke Pekalongan
@@ -162,7 +162,7 @@ local function toPekalongan()
     -- until countdownTime <= 0
 
     -- -- Setelah hitungan mundur selesai, kirim pesan "Teleportasi sudah ready!"
-    -- SendMessage("Teleportasi sudah ready!")
+    -- SendMessage(".")
 end
 
 -- Fungsi Teleport ke Semarang
@@ -179,7 +179,7 @@ local function toSemarang()
     -- until countdownTime <= 0
 
     -- -- Setelah hitungan mundur selesai, kirim pesan "Teleportasi sudah ready!"
-    -- SendMessage("Teleportasi sudah ready!")
+    -- SendMessage(".")
 end
 
 -- reset
@@ -200,7 +200,7 @@ end
 
 local function checkJump(text)
     if text == "jump" then
-        SendMessage("Baik tuan")
+        SendMessage(".")
         doJump()
         wait(14)
     end
@@ -208,7 +208,7 @@ end
 
 local function checkGetInTheCar(text)
     if text == "in" then
-        SendMessage("Baik tuan")
+        SendMessage(".")
         getInTheCar()
         wait(14)
     end
@@ -216,7 +216,7 @@ end
 
 local function checkToShad(text)
     if text == "shd" then
-        SendMessage("Baik ke pt shad tuan")
+        SendMessage(".")
         toShad()
         wait(14)
     end
@@ -224,7 +224,7 @@ end
 
 local function checkToPalimanan(text)
     if text == "pl" then
-        SendMessage("Baik ke palimanan tuan")
+        SendMessage(".")
         toPalimanan()
         wait(14)
     end
@@ -233,14 +233,14 @@ end
 local function checkToCirebon(text)
     if text == "cr" then
         toCirebon()
-        SendMessage("Baik ke cirebon tuan")
+        SendMessage(".")
         wait(14)
     end
 end
 
 local function checkToKM279(text)
     if text == "km" then
-        SendMessage("Baik ke km tuan")
+        SendMessage(".")
         toKM279()
         wait(14)
     end
@@ -248,7 +248,7 @@ end
 
 local function checkToPekalongan(text)
     if text == "pk" then
-        SendMessage("Baik ke Pekalongan tuan")
+        SendMessage(".")
         toPekalongan()
         wait(14)
     end
@@ -256,7 +256,7 @@ end
 
 local function checkToSemarang(text)
     if text == "sm" then
-        SendMessage("Baik ke semarang tuan")
+        SendMessage(".")
         toSemarang()
         wait(14)
     end
@@ -264,7 +264,7 @@ end
 
 local function checkResetBot(text)
     if text == "r" then
-        SendMessage("Hail to the King!")
+        SendMessage(".")
         wait(2)
         resetBot()
         wait(14)
