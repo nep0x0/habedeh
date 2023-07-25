@@ -6,6 +6,14 @@ local function doJump()
     game:GetService('VirtualInputManager'):SendKeyEvent(false, 'Space', false, uwu)
 end
 
+-- seat on drive
+local function getInTheCar()
+        local vim = game:GetService('VirtualInputManager')
+        vim:SendKeyEvent(true, 'E', false, game)
+        wait(2)
+        vim:SendKeyEvent(true, 'E', false, game)
+        wait(1)
+end
 
 --- message function---
 -----------------------
@@ -29,6 +37,8 @@ end
 --teleport function------
 
 local function TeleportToDestination(destination)
+    getInTheCar()
+    
     local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
     local Character = LocalPlayer.Character
@@ -78,14 +88,7 @@ end
 -- command funciton --
 
 
--- seat on drive
-local function getInTheCar()
-        local vim = game:GetService('VirtualInputManager')
-        vim:SendKeyEvent(true, 'E', false, game)
-        wait(2)
-        vim:SendKeyEvent(true, 'E', false, game)
-        wait(1)
-end
+
 
 -- to pt shad
 local function toShad()
@@ -100,8 +103,8 @@ end
 -- Fungsi Teleport ke Palimanan
 local function toPalimanan()
     -- local countdownTime = 60 -- 1 menit dalam detik
-    getInTheCar()
-    wait(.2)
+    -- getInTheCar()
+    -- wait(.2)
     -- Lakukan teleportasi ke lokasi Palimanan
     TeleportToDestination(Vector3.new(-12959, 1057, -16319))
 
@@ -118,8 +121,8 @@ end
 -- Fungsi Teleport ke Cirebon
 local function toCirebon()
     -- local countdownTime = 60 -- 1 menit dalam detik
-    getInTheCar()
-    wait(.2)
+    -- getInTheCar()
+    -- wait(.2)
     -- Lakukan teleportasi ke lokasi Cirebon
     TeleportToDestination(Vector3.new(-21774, 1048, -27773))
 
@@ -136,8 +139,8 @@ end
 -- Fungsi Teleport ke KM279
 local function toKM279()
     -- local countdownTime = 60 -- 1 menit dalam detik
-    getInTheCar()
-    wait(.2)
+    -- getInTheCar()
+    -- wait(.2)
     -- Lakukan teleportasi ke lokasi KM279
     TeleportToDestination(Vector3.new(-25871, 1055, -43846))
 
@@ -154,8 +157,8 @@ end
 -- Fungsi Teleport ke Pekalongan
 local function toPekalongan()
     -- local countdownTime = 60 -- 1 menit dalam detik
-    getInTheCar()
-    wait(.2)
+    -- getInTheCar()
+    -- wait(.2)
     -- Lakukan teleportasi ke lokasi Pekalongan
     TeleportToDestination(Vector3.new(-38685, 1018, -62449))
 
@@ -172,8 +175,8 @@ end
 -- Fungsi Teleport ke Semarang
 local function toSemarang()
     -- local countdownTime = 60 -- 1 menit dalam detik
-    getInTheCar()
-    wait(.2)
+    -- getInTheCar()
+    -- wait(.2)
     -- Lakukan teleportasi ke lokasi Semarang
     TeleportToDestination(Vector3.new(-50858, 1018, -86462))
 
