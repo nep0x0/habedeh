@@ -24,7 +24,7 @@ local function driveTheCar()
         local vim = game:GetService('VirtualInputManager')
         vim:SendKeyEvent(true, 'W', false, game)
         wait(2)
-        vim:SendKeyEvent(true, 'W', false, game)
+        vim:SendKeyEvent(false, 'W', false, game)
 end
 
 --- message function---
