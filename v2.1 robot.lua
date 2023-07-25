@@ -18,9 +18,10 @@ end
 local function driveTheCar()
         local vim = game:GetService('VirtualInputManager')
         vim:SendKeyEvent(true, 'P', false, game)
-        wait(1)
-        vim:SendKeyEvent(true, 'P', false, game)
+        -- wait(1)
+        -- vim:SendKeyEvent(true, 'P', false, game)
         wait(0.5)
+        local vim = game:GetService('VirtualInputManager')
         vim:SendKeyEvent(true, 'W', false, game)
         wait(2)
         vim:SendKeyEvent(true, 'W', false, game)
@@ -84,9 +85,11 @@ local function TeleportToDestination(destination)
     until countdownTime <= 0
     driveTheCar()
     wait(2)
-    -- Pesan setelah hitungan mundur selesai
-    SendMessage(".")
     doJump()
+    -- Pesan setelah hitungan mundur selesai
+    wait(25)
+    SendMessage(".")
+    
 end
 
 --end teleport funtion --
