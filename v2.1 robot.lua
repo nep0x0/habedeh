@@ -1,5 +1,3 @@
-
-
 --jump
 local function doJump()
     -- Gantikan ini dengan kode yang menjalankan lompatan karakter
