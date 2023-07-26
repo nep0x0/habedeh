@@ -87,11 +87,11 @@ local function TeleportToDestination(destination)
         wait(1)
         countdownTime = countdownTime - 1
     until countdownTime <= 0
-    driveTheCar()
+    -- driveTheCar()
     wait(2)
     doJump()
     -- Pesan setelah hitungan mundur selesai
-    wait(32)
+    wait(37)
     SendMessage("***")
     
 end
