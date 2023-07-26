@@ -1,6 +1,6 @@
 
 local teleportEnabled = false
-local teleportTimer = 60
+local teleportTimer = 58
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 local Window = Library:MakeWindow({Name = "Bebek Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
@@ -163,7 +163,7 @@ OtherSection:AddToggle({
             game:GetService('VirtualInputManager'):SendKeyEvent(true,'F',false,uwu)
             wait(0.2)
             game:GetService('VirtualInputManager'):SendKeyEvent(false,'F',false,uwu)
-            wait(15)
+            wait(8)
             -- seat on drive
             local vim = game:GetService('VirtualInputManager')
             vim:SendKeyEvent(true, 'E', false, game)
@@ -183,7 +183,7 @@ OtherSection:AddToggle({
             game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
             -- work
             teleportEnabled = false
-            teleportTimer = 60
+            teleportTimer = 58
             print("Toggle Off")
         end
     end
@@ -192,62 +192,22 @@ OtherSection:AddToggle({
 local isAntiAFKEnabled = false -- Variable untuk mengetahui apakah "Anti AFK" diaktifkan
 
 local function enableAntiAFK()
-    --// Cache
-
-    local getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, stringlower = getgenv, getnamecallmethod, hookmetamethod, newcclosure, checkcaller, string.lower
-
-    --// Loaded check
-
-    if getgenv().ED_AntiKick then return end
-
-    --// Variables
-
-    local Players, StarterGui, OldNamecall = game:GetService("Players"), game:GetService("StarterGui")
-
-    --// Global Variables
-
-    getgenv().ED_AntiKick = {
-        SendNotifications = true, -- Set to true if you want to get notified for every event
-        CheckCaller = false -- Set to true if you want to disable kicking by other executed scripts
-    }
-
-    --// Main
-
-    OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
-        if (getgenv().ED_AntiKick.CheckCaller and not checkcaller() or true) and stringlower(getnamecallmethod()) == "kick" then
-            if getgenv().ED_AntiKick.SendNotifications then
-                StarterGui:SetCore("SendNotification", {
-                    Title = "Exunys Developer",
-                    Text = "The script has successfully intercepted an attempted kick.",
-                    Icon = "rbxassetid://6238540373",
-                    Duration = 2,
-                })
-            end
-
-            return nil
-        end
-
-        return OldNamecall(...)
-    end))
-
-    if getgenv().ED_AntiKick.SendNotifications then
-        StarterGui:SetCore("SendNotification", {
-            Title = "Exunys Developer",
-            Text = "Anti-Kick script loaded!",
-            Icon = "rbxassetid://6238537240",
-            Duration = 3,
-        })
-    end
+    local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+        vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        wait(1)
+        vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
 end
 
 local function toggleAntiAFK(state)
     if state then
         isAntiAFKEnabled = true
-        print("Anti AFK is now enabled.")
+        print("enabled.")
         enableAntiAFK() -- Panggil fungsi untuk menjalankan "Anti AFK"
     else
         isAntiAFKEnabled = false
-        print("Anti AFK is now disabled.")
+        print("disabled.")
     end
 end
 
@@ -282,7 +242,7 @@ spawn(function()
                     TeleportToDestination(waypointDestination)
                 end
 
-                teleportTimer = 60
+                teleportTimer = 58
             else
                 teleportTimer = teleportTimer - 1
                 print(teleportTimer)
