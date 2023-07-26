@@ -15,21 +15,21 @@ local function getInTheCar()
         wait(1)
 end
 
-local function driveTheCar()
-        local vim = game:GetService('VirtualInputManager')
-        vim:SendKeyEvent(true, 'P', false, game)
-        -- wait(1)
-        -- vim:SendKeyEvent(true, 'P', false, game)
-        wait(0.05)
-        local vim = game:GetService('VirtualInputManager')
-        vim:SendKeyEvent(true, 'W', false, game)
-        wait(1)
-        vim:SendKeyEvent(false, 'W', false, game)
-        vim:SendKeyEvent(true, 'P', false, game)
-        wait(0.05)
-        vim:SendKeyEvent(false, 'P', false, game)
-        wait(1)
-end
+-- local function driveTheCar()
+--         local vim = game:GetService('VirtualInputManager')
+--         vim:SendKeyEvent(true, 'P', false, game)
+--         -- wait(1)
+--         -- vim:SendKeyEvent(true, 'P', false, game)
+--         wait(0.05)
+--         local vim = game:GetService('VirtualInputManager')
+--         vim:SendKeyEvent(true, 'W', false, game)
+--         wait(1)
+--         vim:SendKeyEvent(false, 'W', false, game)
+--         vim:SendKeyEvent(true, 'P', false, game)
+--         wait(0.05)
+--         vim:SendKeyEvent(false, 'P', false, game)
+--         wait(1)
+-- end
 
 --- message function---
 -----------------------
