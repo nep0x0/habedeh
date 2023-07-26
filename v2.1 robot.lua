@@ -25,6 +25,10 @@ local function driveTheCar()
         vim:SendKeyEvent(true, 'W', false, game)
         wait(1)
         vim:SendKeyEvent(false, 'W', false, game)
+        vim:SendKeyEvent(true, 'P', false, game)
+        wait(0.05)
+        vim:SendKeyEvent(false, 'P', false, game)
+        wait(1)
 end
 
 --- message function---
