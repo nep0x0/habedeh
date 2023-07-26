@@ -1,23 +1,4 @@
-local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
-local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-local MainSection = Main:AddSection({Name = "Main"})
-
-
-MainSection:AddToggle({
-    Name = "Robot Bebek",
-    Callback = function(state)
-        -- Your Auto Truck Trip code here
-        if state then
-            teleportEnabled = true
-            -- print("Toggle On")
-        else
-            teleportEnabled = false
-            -- print("Toggle Off")
-        end
-    end
-})
 
 --jump
 local function doJump()
@@ -35,6 +16,22 @@ local function getInTheCar()
         vim:SendKeyEvent(true, 'E', false, game)
         wait(1)
 end
+
+-- local function driveTheCar()
+--         local vim = game:GetService('VirtualInputManager')
+--         vim:SendKeyEvent(true, 'P', false, game)
+--         -- wait(1)
+--         -- vim:SendKeyEvent(true, 'P', false, game)
+--         wait(0.05)
+--         local vim = game:GetService('VirtualInputManager')
+--         vim:SendKeyEvent(true, 'W', false, game)
+--         wait(1)
+--         vim:SendKeyEvent(false, 'W', false, game)
+--         vim:SendKeyEvent(true, 'P', false, game)
+--         wait(0.05)
+--         vim:SendKeyEvent(false, 'P', false, game)
+--         wait(1)
+-- end
 
 --- message function---
 -----------------------
@@ -320,6 +317,60 @@ local function SendMessage(message)
     )
 end
 
+
+
+--------------------
+-- gui -------------
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Bebek Hub", "GrapeTheme")
+
+local Other = Window:NewTab("Other")
+local OtherSection = Other:NewSection("Other")
+local toggleState = false -- variabel untuk menyimpan status toggle
+
+local commandBotToggle = OtherSection:NewToggle("Command Bot", "Command Bot", function(state)
+    toggleState = state -- menyimpan status toggle di variabel
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+local isAntiAFKEnabled = false -- Variable untuk mengetahui apakah "Anti AFK" diaktifkan
+
+local function enableAntiAFK()
+    local button = game:GetService("Players").LocalPlayer.PlayerGui.Main.Container.Hub.Radio.Frame.TextButton -- path to button here
+
+    local events = {"MouseButton1Click", "MouseButton1Down", "Activated", "MouseButton1Up"}
+    while isAntiAFKEnabled do
+        for i, v in pairs(events) do
+            for i, connection in pairs(getconnections(button[v])) do
+                connection:Fire()
+            end
+        end
+        wait(60) -- Menunggu selama 60 detik sebelum tombol ditekan kembali
+    end
+end
+
+local function toggleAntiAFK(state)
+    if state then
+        isAntiAFKEnabled = true
+        print("Anti AFK is now enabled.")
+        enableAntiAFK() -- Panggil fungsi untuk menjalankan "Anti AFK"
+    else
+        isAntiAFKEnabled = false
+        print("Anti AFK is now disabled.")
+    end
+end
+
+OtherSection:NewToggle("Anti AFK", "Anti AFK", toggleAntiAFK) -- Menggunakan fungsi toggleAntiAFK sebagai callback saat tombol ditekan
+
+
+-- end gui ---------
+--------------------
+
+
 ------------------------
 --  chat reader --------
 
@@ -380,6 +431,3 @@ end
 
 -- end  chat reader --
 ----------------------
--- Call the Orion Library's Init function to finish setting up the UI
-Library:Init()
-
