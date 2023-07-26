@@ -90,8 +90,12 @@ local function TeleportToDestination(destination)
     -- driveTheCar()
     wait(2)
     doJump()
+    wait(1)
+    getInTheCar()
+    wait(1)
+    doJump()
     -- Pesan setelah hitungan mundur selesai
-    wait(37)
+    wait(35)
     SendMessage("***")
     
 end
