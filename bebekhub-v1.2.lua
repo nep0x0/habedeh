@@ -1,6 +1,6 @@
 
 local teleportEnabled = false
-local teleportTimer = 58
+local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 local Window = Library:MakeWindow({Name = "Bebek Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
@@ -183,7 +183,7 @@ OtherSection:AddToggle({
             game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
             -- work
             teleportEnabled = false
-            teleportTimer = 58
+            teleportTimer = 48
             print("Toggle Off")
         end
     end
@@ -242,7 +242,7 @@ spawn(function()
                     TeleportToDestination(waypointDestination)
                 end
 
-                teleportTimer = 58
+                teleportTimer = 48
             else
                 teleportTimer = teleportTimer - 1
                 print(teleportTimer)
