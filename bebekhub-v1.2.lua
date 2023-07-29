@@ -245,7 +245,7 @@ spawn(function()
                 teleportTimer = 48
             else
                 teleportTimer = teleportTimer - 1
-                print(teleportTimer)
+                -- print(teleportTimer)
             end
         end
         wait(1)
