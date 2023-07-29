@@ -177,14 +177,14 @@ OtherSection:AddToggle({
 
             -- work
             teleportEnabled = true
-            print("Toggle On")
+            -- print("Toggle On")
         else
             local args = {[1] = "Unemployee"}
             game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
             -- work
             teleportEnabled = false
             teleportTimer = 48
-            print("Toggle Off")
+            -- print("Toggle Off")
         end
     end
 })
@@ -203,11 +203,11 @@ end
 local function toggleAntiAFK(state)
     if state then
         isAntiAFKEnabled = true
-        print("enabled.")
+        -- print("enabled.")
         enableAntiAFK() -- Panggil fungsi untuk menjalankan "Anti AFK"
     else
         isAntiAFKEnabled = false
-        print("disabled.")
+        -- print("disabled.")
     end
 end
 
@@ -222,10 +222,10 @@ OtherSection:AddToggle({
         -- Your Auto Truck Trip code here
         if state then
             teleportEnabled = true
-            print("Toggle On")
+            -- print("Toggle On")
         else
             teleportEnabled = false
-            print("Toggle Off")
+            -- print("Toggle Off")
         end
     end
 })
