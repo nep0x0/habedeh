@@ -1,48 +1,148 @@
--- Load the library
+
+local teleportEnabled = false
+local teleportTimer = 48
+
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
 local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.0", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
--- Define the destinations
-local destinations = {
-    ["Silambat Palimanan"] = Vector3.new(-13001.578, 1058.455, -16360.201),
-    ["Rest Area Km 279"] = Vector3.new(-25910.939, 1059.604, -43896.273),
-    ["SuperMart Pekalongan"] = Vector3.new(-38720.934, 1018.218, -62491.059),
-    ["PT.CDID Cargo Cirebon"] = Vector3.new(-21803.887, 1046.989, -27817.059),
-    ["Rojod Semarang"] = Vector3.new(-50889.66, 1017.867, -86514.797)
-}
+local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+local MainSection = Main:AddSection({Name = "Main"})
 
--- Define the teleport function
+MainSection:AddSlider({
+    Name = "Walkspeed",
+    Default = 16,
+    Min = 16,
+    Max = 500,
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    end
+})
+
+MainSection:AddSlider({
+    Name = "Jumppower",
+    Default = 50,
+    Min = 50,
+    Max = 350,
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+    end
+})
+
+MainSection:AddButton({
+    Name = "Print Waypoint",
+    Callback = function()
+        local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
+        local textLabel = waypoint.BillboardGui.TextLabel
+        print(textLabel.Text)
+    end
+})
+
+local Truck = Window:MakeTab({Name = "Truck", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+local Truckection = Truck:AddSection({Name = "Truck"})
+
 local function TeleportToDestination(destination)
     -- Your teleport function here
-    -- ...
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local Character = LocalPlayer.Character
+    local Humanoid = Character:FindFirstChildWhichIsA("Humanoid")
+
+    local SeatPart = Humanoid.SeatPart
+    local Vehicle = SeatPart.Parent
+
+    if SeatPart:FindFirstAncestor("Body") then
+        Vehicle = SeatPart:FindFirstAncestor("Body").Parent
+    end
+
+    Vehicle.PrimaryPart = SeatPart
+
+    Character.Parent = Vehicle
+    Vehicle:MoveTo(destination)
+
+    -- Menunggu sampai vehicle mencapai tujuan
+    Vehicle.PrimaryPart.Anchored = true
+    wait(2) -- Menunggu selama 2 detik (sesuaikan dengan durasi yang diinginkan)
+    Vehicle.PrimaryPart.Anchored = false
+
+    Character.Parent = workspace
 end
 
--- Define the tabs
-local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-local Truck = Window:MakeTab({Name = "Truck", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+local function TeleportToPalimanan()
+    TeleportToDestination(Vector3.new(-13001.578, 1058.455, -16360.201))
+end
+
+local function TeleportToCirebon()
+    TeleportToDestination(Vector3.new(-21803.887, 1046.989, -27817.059))
+end
+
+local function TeleportToKM279()
+    TeleportToDestination(Vector3.new(-25910.939, 1059.604, -43896.273))
+end
+
+local function TeleportToPekalongan()
+    TeleportToDestination(Vector3.new(-38720.934, 1018.218, -62491.059))
+end
+
+local function TeleportToSemarang()
+    TeleportToDestination(Vector3.new(-50889.66, 1017.867, -86514.797))
+end
+
+local function GetWaypointDestination(waypoint)
+    local destinations = {
+        ["Silambat Palimanan"] = Vector3.new(-13001.578, 1058.455, -16360.201),
+        ["Rest Area Km 279"] = Vector3.new(-25910.939, 1059.604, -43896.273),
+        ["SuperMart Pekalongan"] = Vector3.new(-38720.934, 1018.218, -62491.059),
+        ["PT.CDID Cargo Cirebon"] = Vector3.new(-21803.887, 1046.989, -27817.059),
+        ["Rojod Semarang"] = Vector3.new(-50889.66, 1017.867, -86514.797)
+    }
+
+    return destinations[waypoint]
+end
+
+Truckection:AddButton({
+    Name = "Silambat Palimanan",
+    Callback = function()
+        TeleportToPalimanan()
+    end
+})
+
+Truckection:AddButton({
+    Name = "PT.CDID Cargo Cirebon",
+    Callback = function()
+        TeleportToCirebon()
+    end
+})
+
+Truckection:AddButton({
+    Name = "Rest Area Km 279",
+    Callback = function()
+        TeleportToKM279()
+    end
+})
+
+Truckection:AddButton({
+    Name = "SuperMart Pekalongan",
+    Callback = function()
+        TeleportToPekalongan()
+    end
+})
+
+Truckection:AddButton({
+    Name = "Rojod Semarang",
+    Callback = function()
+        TeleportToSemarang()
+    end
+})
+
 local Other = Window:MakeTab({Name = "Other", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-
--- Define the sections
-local MainSection = Main:AddSection({Name = "Main"})
-local Truckection = Truck:AddSection({Name = "Truck"})
 local OtherSection = Other:AddSection({Name = "Other"})
-
--- Add sliders and buttons to the Main section
-MainSection:AddSlider({Name = "Walkspeed", Default = 16, Min = 16, Max = 500, Callback = function(Value) game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value end})
-MainSection:AddSlider({Name = "Jumppower", Default = 50, Min = 50, Max = 350, Callback = function(Value) game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value end})
-MainSection:AddButton({Name = "Print Waypoint", Callback = function() print(game:GetService("Workspace").Etc.Waypoint.Waypoint.BillboardGui.TextLabel.Text) end})
-
--- Add buttons to the Truck section
-for name, destination in pairs(destinations) do
-    Truckection:AddButton({Name = name, Callback = function() TeleportToDestination(destination) end})
-end
 
 local function toggleJobTruck(state)
     if state then
         local args = {[1] = "Truck"}
         game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
         wait(2)
-        -- Teleport ke tempat yang diinginkan
+        -- Teleport ke pt shad
         game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
         -- Wait sebelum jatuh (hindari kematian akibat jatuh)
         game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
@@ -50,32 +150,43 @@ local function toggleJobTruck(state)
         game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
         wait(1.5)
         -- Press tombol "E"
-        game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
-        wait(0.2)
-        game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
-        wait(2)
-        -- Teleport spawn car
-        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
-        wait(4)
-        -- spawn car
-        game:GetService('VirtualInputManager'):SendKeyEvent(true,'F',false,uwu)
-        wait(0.2)
-        game:GetService('VirtualInputManager'):SendKeyEvent(false,'F',false,uwu)
-        wait(8)
-        -- seat on drive
-        local vim = game:GetService('VirtualInputManager')
-        vim:SendKeyEvent(true, 'E', false, game)
-        wait(2)
-        vim:SendKeyEvent(true, 'E', false, game)
-        wait(1)
-        -- remove text
-        vim:SendKeyEvent(true, 'Q', false, game)
-        wait(0.2)
-        vim:SendKeyEvent(true, 'Q', false, game)
+        -- game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+        -- wait(0.2)
+        -- game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+        -- wait(2)
 
-        -- work
-        teleportEnabled = true
-        -- print("Toggle On")
+        local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
+        local textLabel = waypoint.BillboardGui.TextLabel
+
+        if textLabel ~= "Rojod Semarang" then
+            game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+            wait(0.2)
+            game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+            wait(2)
+        else
+            -- Teleport spawn car
+            game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
+            wait(4)
+            -- spawn car
+            game:GetService('VirtualInputManager'):SendKeyEvent(true,'F',false,uwu)
+            wait(0.2)
+            game:GetService('VirtualInputManager'):SendKeyEvent(false,'F',false,uwu)
+            wait(8)
+            -- seat on drive
+            local vim = game:GetService('VirtualInputManager')
+            vim:SendKeyEvent(true, 'E', false, game)
+            wait(2)
+            vim:SendKeyEvent(true, 'E', false, game)
+            wait(1)
+            -- remove text
+            vim:SendKeyEvent(true, 'Q', false, game)
+            wait(0.2)
+            vim:SendKeyEvent(true, 'Q', false, game)
+
+            -- work
+            teleportEnabled = true
+            -- print("Toggle On")
+        end
     else
         local args = {[1] = "Unemployee"}
         game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
@@ -138,21 +249,17 @@ spawn(function()
         if teleportEnabled then
             if teleportTimer <= 0 then
                 local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
-                local textLabel = waypoint.BillboardGui.TextLabel.Text
+                local textLabel = waypoint.BillboardGui.TextLabel
 
-                -- Jika waypoint bukan "Semarang" atau "Pekalongan", ulangi proses "Job Truk"
-                if textLabel ~= "Rojod Semarang" then
-                    toggleJobTruck
-                else
-                    local waypointDestination = GetWaypointDestination(textLabel)
-                    if waypointDestination then
-                        TeleportToDestination(waypointDestination)
-                    end
+                local waypointDestination = GetWaypointDestination(textLabel.Text)
+                if waypointDestination then
+                    TeleportToDestination(waypointDestination)
                 end
 
                 teleportTimer = 48
             else
                 teleportTimer = teleportTimer - 1
+                -- print(teleportTimer)
             end
         end
         wait(1)
