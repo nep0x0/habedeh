@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.0", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -149,16 +149,16 @@ local function toggleJobTruck(state)
         wait(3)
         game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
         wait(1.5)
-        -- Press tombol "E"
-        -- game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
-        -- wait(0.2)
-        -- game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
-        -- wait(2)
+        Press tombol "E"
+        game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+        wait(0.2)
+        game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+        wait(2)
 
         local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
         local textLabel = waypoint.BillboardGui.TextLabel
 
-        if textLabel ~= "Rojod Semarang" then
+        if textLabel -= "Rojod Semarang" then
             game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
             wait(0.2)
             game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
