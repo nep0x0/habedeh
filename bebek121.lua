@@ -158,12 +158,7 @@ local function toggleJobTruck(state)
         local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
         local textLabel = waypoint.BillboardGui.TextLabel
 
-        if textLabel -= "Rojod Semarang" then
-            game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
-            wait(0.2)
-            game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
-            wait(2)
-        else
+        if textLabel == "Rojod Semarang" then
             -- Teleport spawn car
             game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
             wait(4)
@@ -186,6 +181,21 @@ local function toggleJobTruck(state)
             -- work
             teleportEnabled = true
             -- print("Toggle On")
+        else
+            game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+            wait(2)
+            -- Teleport ke pt shad
+            game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
+            -- Wait sebelum jatuh (hindari kematian akibat jatuh)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+            wait(3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            wait(1.5)
+            Press tombol "E"
+            game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+            wait(0.2)
+            game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+            wait(2)
         end
     else
         local args = {[1] = "Unemployee"}
