@@ -182,8 +182,8 @@ local function toggleJobTruck(state)
             teleportEnabled = true
             -- print("Toggle On")
         else
-            game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
-            wait(2)
+            -- game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+            -- wait(2)
             -- Teleport ke pt shad
             game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
             -- Wait sebelum jatuh (hindari kematian akibat jatuh)
