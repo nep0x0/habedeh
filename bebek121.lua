@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.0", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -137,33 +137,25 @@ Truckection:AddButton({
 local Other = Window:MakeTab({Name = "Other", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local OtherSection = Other:AddSection({Name = "Other"})
 
-local function getJobDestination(state)
-    -- Teleport ke pt shad
-    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
-    -- Wait sebelum jatuh (hindari kematian akibat jatuh)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-    wait(3)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-    wait(1.5)
-    Press tombol "E"
-    game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
-    wait(0.2)
-    game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
-    wait(2)
-end
-
-local function toggleJobTruck(state)
-    if state then
-        local args = {[1] = "Truck"}
-        game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
-        wait(2)
-
-        local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
-        local textLabel = waypoint.BillboardGui.TextLabel
-
-        if textLabel == "Rojod Semarang" then
-            getJobDestination(state)
-        else
+OtherSection:AddToggle({
+    Name = "Job Truk",
+    Callback = function(state)
+        if state then
+            local args = {[1] = "Truck"}
+            game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+            wait(2)
+            -- Teleport ke tempat yang diinginkan
+            game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
+            -- Wait sebelum jatuh (hindari kematian akibat jatuh)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+            wait(3)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            wait(1.5)
+            -- Press tombol "E"
+            game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+            wait(0.2)
+            game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+            wait(2)
             -- Teleport spawn car
             game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
             wait(4)
@@ -186,21 +178,15 @@ local function toggleJobTruck(state)
             -- work
             teleportEnabled = true
             -- print("Toggle On")
+        else
+            local args = {[1] = "Unemployee"}
+            game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+            -- work
+            teleportEnabled = false
+            teleportTimer = 48
+            -- print("Toggle Off")
         end
-    else
-        local args = {[1] = "Unemployee"}
-        game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
-        -- work
-        teleportEnabled = false
-        teleportTimer = 48
-        -- print("Toggle Off")
     end
-end
-
--- Add toggles to the Other section
-OtherSection:AddToggle({
-    Name = "Job Truk",
-    Callback = toggleJobTruck
 })
 
 local isAntiAFKEnabled = false -- Variable untuk mengetahui apakah "Anti AFK" diaktifkan
@@ -252,19 +238,55 @@ spawn(function()
                 local textLabel = waypoint.BillboardGui.TextLabel
 
                 local waypointDestination = GetWaypointDestination(textLabel.Text)
-                if waypointDestination then
+                if waypointDestination and textLabel.Text == "Rojod Semarang" then
                     TeleportToDestination(waypointDestination)
+                else
+                    -- If the waypoint is not "Rojod Semarang", re-run the job acquisition process
+                    local args = {[1] = "Unemployee"}
+                    game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+                    teleportEnabled = false
+                    teleportTimer = 48
+                    wait(1)
+                    local args = {[1] = "Truck"}
+                    game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+                    wait(2)
+                    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                    wait(3)
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                    wait(1.5)
+                    game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+                    wait(0.2)
+                    game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+                    wait(2)
+                    game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
+                    wait(4)
+                    game:GetService('VirtualInputManager'):SendKeyEvent(true,'F',false,uwu)
+                    wait(0.2)
+                    game:GetService('VirtualInputManager'):SendKeyEvent(false,'F',false,uwu)
+                    wait(8)
+                    local vim = game:GetService('VirtualInputManager')
+                    vim:SendKeyEvent(true, 'E', false, game)
+                    wait(2)
+                    vim:SendKeyEvent(true, 'E', false, game)
+                    wait(1)
+                    vim:SendKeyEvent(true, 'Q', false, game)
+                    wait(0.2)
+                    vim:SendKeyEvent(true, 'Q', false, game)
+
+                    teleportEnabled = true
+                    teleportTimer = 48
                 end
 
                 teleportTimer = 48
             else
                 teleportTimer = teleportTimer - 1
-                -- print(teleportTimer)
             end
         end
         wait(1)
     end
 end)
+
 
 -- Call the Orion Library's Init function to finish setting up the UI
 Library:Init()
