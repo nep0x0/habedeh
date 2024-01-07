@@ -37,57 +37,59 @@ for name, destination in pairs(destinations) do
     Truckection:AddButton({Name = name, Callback = function() TeleportToDestination(destination) end})
 end
 
+local function toggleJobTruck(state)
+    if state then
+        local args = {[1] = "Truck"}
+        game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+        wait(2)
+        -- Teleport ke tempat yang diinginkan
+        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
+        -- Wait sebelum jatuh (hindari kematian akibat jatuh)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+        wait(3)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+        wait(1.5)
+        -- Press tombol "E"
+        game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+        wait(0.2)
+        game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+        wait(2)
+        -- Teleport spawn car
+        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
+        wait(4)
+        -- spawn car
+        game:GetService('VirtualInputManager'):SendKeyEvent(true,'F',false,uwu)
+        wait(0.2)
+        game:GetService('VirtualInputManager'):SendKeyEvent(false,'F',false,uwu)
+        wait(8)
+        -- seat on drive
+        local vim = game:GetService('VirtualInputManager')
+        vim:SendKeyEvent(true, 'E', false, game)
+        wait(2)
+        vim:SendKeyEvent(true, 'E', false, game)
+        wait(1)
+        -- remove text
+        vim:SendKeyEvent(true, 'Q', false, game)
+        wait(0.2)
+        vim:SendKeyEvent(true, 'Q', false, game)
+
+        -- work
+        teleportEnabled = true
+        -- print("Toggle On")
+    else
+        local args = {[1] = "Unemployee"}
+        game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+        -- work
+        teleportEnabled = false
+        teleportTimer = 48
+        -- print("Toggle Off")
+    end
+end
+
 -- Add toggles to the Other section
 OtherSection:AddToggle({
     Name = "Job Truk",
-    Callback = function(state)
-        if state then
-            local args = {[1] = "Truck"}
-            game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
-            wait(2)
-            -- Teleport ke tempat yang diinginkan
-            game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
-            -- Wait sebelum jatuh (hindari kematian akibat jatuh)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-            wait(3)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-            wait(1.5)
-            -- Press tombol "E"
-            game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
-            wait(0.2)
-            game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
-            wait(2)
-            -- Teleport spawn car
-            game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
-            wait(4)
-            -- spawn car
-            game:GetService('VirtualInputManager'):SendKeyEvent(true,'F',false,uwu)
-            wait(0.2)
-            game:GetService('VirtualInputManager'):SendKeyEvent(false,'F',false,uwu)
-            wait(8)
-            -- seat on drive
-            local vim = game:GetService('VirtualInputManager')
-            vim:SendKeyEvent(true, 'E', false, game)
-            wait(2)
-            vim:SendKeyEvent(true, 'E', false, game)
-            wait(1)
-            -- remove text
-            vim:SendKeyEvent(true, 'Q', false, game)
-            wait(0.2)
-            vim:SendKeyEvent(true, 'Q', false, game)
-
-            -- work
-            teleportEnabled = true
-            -- print("Toggle On")
-        else
-            local args = {[1] = "Unemployee"}
-            game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
-            -- work
-            teleportEnabled = false
-            teleportTimer = 48
-            -- print("Toggle Off")
-        end
-    end
+    Callback = toggleJobTruck
 })
 
 local isAntiAFKEnabled = false -- Variable untuk mengetahui apakah "Anti AFK" diaktifkan
@@ -139,9 +141,8 @@ spawn(function()
                 local textLabel = waypoint.BillboardGui.TextLabel.Text
 
                 -- Jika waypoint bukan "Semarang" atau "Pekalongan", ulangi proses "Job Truk"
-                if textLabel ~= "Rojod Semarang" and textLabel ~= "SuperMart Pekalongan" then
-                    -- Kode untuk memulai "Job Truk" di sini
-                    -- ...
+                if textLabel ~= "Rojod Semarang" then
+                    toggleJobTruck
                 else
                     local waypointDestination = GetWaypointDestination(textLabel)
                     if waypointDestination then
