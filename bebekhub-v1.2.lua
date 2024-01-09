@@ -145,7 +145,8 @@ OtherSection:AddToggle({
             game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
             wait(2)
             -- Teleport ke tempat yang diinginkan
-            game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
+            -- game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
+            game.Players.LocalPlayer.Character:MoveTo(Vector3.new( -21801, 1062, -26799))
             -- Wait sebelum jatuh (hindari kematian akibat jatuh)
             game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
             wait(3)
