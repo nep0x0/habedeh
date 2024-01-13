@@ -320,7 +320,7 @@ end
 --------------------
 -- gui -------------
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("Bebek Hub", "GrapeTheme")
+local Window = Library.CreateLib("Bebek Hub NEP", "GrapeTheme")
 
 local Other = Window:NewTab("Other")
 local OtherSection = Other:NewSection("Other")
