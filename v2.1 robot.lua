@@ -233,7 +233,7 @@ local function checkJump(text)
     if text == "jump" then
         SendMessage(".")
         doJump()
-        wait(14)
+        wait(10)
     end
 end
 
@@ -241,7 +241,7 @@ local function checkGetInTheCar(text)
     if text == "in" then
         SendMessage(".")
         getInTheCar()
-        wait(14)
+        wait(10)
     end
 end
 
@@ -249,7 +249,7 @@ local function checkToShad(text)
     if text == "shd" then
         SendMessage(".")
         toShad()
-        wait(14)
+        wait(10)
     end
 end
 
@@ -257,7 +257,7 @@ local function checkToPalimanan(text)
     if text == "pl" then
         SendMessage(".")
         toPalimanan()
-        wait(14)
+        wait(10)
     end
 end
 
@@ -265,7 +265,7 @@ local function checkToCirebon(text)
     if text == "cr" then
         toCirebon()
         SendMessage(".")
-        wait(14)
+        wait(10)
     end
 end
 
@@ -273,7 +273,7 @@ local function checkToKM279(text)
     if text == "km" then
         SendMessage(".")
         toKM279()
-        wait(14)
+        wait(10)
     end
 end
 
@@ -281,7 +281,7 @@ local function checkToPekalongan(text)
     if text == "pk" then
         SendMessage(".")
         toPekalongan()
-        wait(14)
+        wait(10)
     end
 end
 
@@ -289,7 +289,7 @@ local function checkToSemarang(text)
     if text == "sm" then
         SendMessage(".")
         toSemarang()
-        wait(14)
+        wait(10)
     end
 end
 
@@ -298,7 +298,7 @@ local function checkResetBot(text)
         SendMessage(".")
         wait(2)
         resetBot()
-        wait(14)
+        wait(10)
     end
 end
 
