@@ -231,6 +231,20 @@ OtherSection:AddToggle({
     end
 })
 
+--baru--
+OtherSection:AddButton({
+    Name = "Hapus Map",
+    Callback = function()
+        local map = game:GetService("Workspace").Map
+        for _, instance in ipairs(map:GetChildren()) do
+            if instance.Name ~= "Base" then
+                instance:Destroy()
+            end
+        end
+    end
+})
+
+
 spawn(function()
     while true do
         if teleportEnabled then
