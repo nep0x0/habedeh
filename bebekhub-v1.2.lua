@@ -37,19 +37,6 @@ MainSection:AddButton({
     end
 })
 
--- Menambahkan search bar di bawah tombol print waypoint
-MainSection:AddTextBox({
-    Name = "Search Waypoint",
-    Callback = function(Value)
-        local destination = GetWaypointDestination(Value)
-        if destination then
-            TeleportToDestination(destination)
-        else
-            print("Waypoint tidak ditemukan")
-        end
-    end
-})
-
 
 local Truck = Window:MakeTab({Name = "Truck", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local Truckection = Truck:AddSection({Name = "Truck"})
