@@ -37,6 +37,19 @@ MainSection:AddButton({
     end
 })
 
+-- Add this function to handle the search logic
+local function handleSearch(text)
+    -- Your search logic here
+    print("Searching for: " .. text)
+end
+
+-- Add this line to the "Main" section
+MainSection:AddTextBox({
+    Name = "Search Bar",
+    Callback = handleSearch
+})
+
+
 local Truck = Window:MakeTab({Name = "Truck", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local Truckection = Truck:AddSection({Name = "Truck"})
 
