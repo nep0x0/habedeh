@@ -244,6 +244,16 @@ OtherSection:AddButton({
     end
 })
 
+OtherSection:AddButton({
+    Name = "Hapus Trailer",
+    Callback = function()
+        local trailer = game:GetService("Workspace").Vehicles.deniautututuhsCar.Trailer1
+        if trailer then
+            trailer:Destroy()
+        end
+    end
+})
+
 
 spawn(function()
     while true do
