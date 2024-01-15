@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 8", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 9", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -276,24 +276,27 @@ local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealers
 local CarSection = Window:MakeTab({Name = "Cars", Icon = "rbxassetid://4483345998", PremiumOnly = false}):AddSection({Name = "Cars"})
 
 for _, dealer in ipairs(dealerContainer:GetChildren()) do
-    -- Membuat daftar nama mobil untuk dealer ini
-    local carNames = {}
+    -- Membuat daftar nama mobil dan harga untuk dealer ini
+    local carNamesAndPrices = {}
     for _, car in ipairs(dealer:GetChildren()) do
-        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible then
-            table.insert(carNames, car.Frame.CarName.Text)
+        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+            local carName = car.Frame.CarName.Text
+            local carPrice = car.Frame.Price.Text
+            table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
         end
     end
 
-    -- Membuat dropdown dengan nama mobil untuk dealer ini
+    -- Membuat dropdown dengan nama mobil dan harga untuk dealer ini
     CarSection:AddDropdown({
         Name = dealer.Name,
-        Default = carNames[1],
-        Options = carNames,
+        Default = carNamesAndPrices[1],
+        Options = carNamesAndPrices,
         Callback = function(Value)
             -- Anda bisa menambahkan fungsi yang diinginkan di sini
         end
     })
 end
+
 
 
 
