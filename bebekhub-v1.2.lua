@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 1", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 2", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -269,42 +269,31 @@ spawn(function()
     end
 end)
 
---baru
 
-local dealerList = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist.Komersial
+--dealer
+local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
 local CarSection = Window:MakeTab({Name = "Cars", Icon = "rbxassetid://4483345998", PremiumOnly = false}):AddSection({Name = "Cars"})
 
--- Membuat daftar nama mobil
-local carNames = {}
-for _, car in ipairs(dealerList:GetChildren()) do
-    if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") then
-        table.insert(carNames, car.Frame.CarName.Text)
-    end
-end
-
--- Membuat dropdown dengan nama mobil
-CarSection:AddDropdown({
-    Name = "Cars",
-    Default = carNames[1],
-    Options = carNames,
-    Callback = function(Value)
-        -- Anda bisa menambahkan fungsi yang diinginkan di sini
-    end
-})
-
--- Membuat fitur pencarian
-CarSection:AddTextbox({
-    Name = "Search",
-    Callback = function(Value)
-        -- Mencari mobil dengan nama yang cocok
-        for _, carName in ipairs(carNames) do
-            if string.match(carName:lower(), Value:lower()) then
-                -- Anda bisa menambahkan fungsi yang diinginkan di sini
-            end
+for _, dealer in ipairs(dealerContainer:GetChildren()) do
+    -- Membuat daftar nama mobil untuk dealer ini
+    local carNames = {}
+    for _, car in ipairs(dealer:GetChildren()) do
+        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") then
+            table.insert(carNames, car.Frame.CarName.Text)
         end
     end
-})
---
+
+    -- Membuat dropdown dengan nama mobil untuk dealer ini
+    CarSection:AddDropdown({
+        Name = dealer.Name,
+        Default = carNames[1],
+        Options = carNames,
+        Callback = function(Value)
+            -- Anda bisa menambahkan fungsi yang diinginkan di sini
+        end
+    })
+end
+
 
 
 
