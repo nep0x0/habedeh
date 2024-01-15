@@ -277,7 +277,6 @@ for _, car in ipairs(dealerList:GetChildren()) do
     CarSection:AddButton({
         Name = car.Name,
         Callback = function()
-            print(car.Name .. " button clicked")
             -- Anda bisa menambahkan fungsi yang diinginkan di sini
         end
     })
