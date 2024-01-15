@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 4", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 5", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -317,9 +317,6 @@ for _, dealer in ipairs(dealerContainer:GetChildren()) do
         end
     })
 end
-
-
-apakah sudah dilakukan pengecekan pada kode ini?
 
 
 
