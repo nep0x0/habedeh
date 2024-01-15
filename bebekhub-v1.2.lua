@@ -279,7 +279,7 @@ for _, dealer in ipairs(dealerContainer:GetChildren()) do
     -- Membuat daftar nama mobil untuk dealer ini
     local carNames = {}
     for _, car in ipairs(dealer:GetChildren()) do
-        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("Limited") and car.Frame.Type.Limited.Visible then
+        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible then
             table.insert(carNames, car.Frame.CarName.Text)
         end
     end
