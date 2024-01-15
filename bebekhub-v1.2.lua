@@ -28,15 +28,6 @@ MainSection:AddSlider({
     end
 })
 
-MainSection:AddButton({
-    Name = "Print Waypoint",
-    Callback = function()
-        local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
-        local textLabel = waypoint.BillboardGui.TextLabel
-        print(textLabel.Text)
-    end
-})
-
 
 local Truck = Window:MakeTab({Name = "Truck", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local Truckection = Truck:AddSection({Name = "Truck"})
@@ -179,14 +170,12 @@ OtherSection:AddToggle({
 
             -- work
             teleportEnabled = true
-            -- print("Toggle On")
         else
             local args = {[1] = "Unemployee"}
             game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
             -- work
             teleportEnabled = false
             teleportTimer = 48
-            -- print("Toggle Off")
         end
     end
 })
@@ -205,11 +194,9 @@ end
 local function toggleAntiAFK(state)
     if state then
         isAntiAFKEnabled = true
-        -- print("enabled.")
         enableAntiAFK() -- Panggil fungsi untuk menjalankan "Anti AFK"
     else
         isAntiAFKEnabled = false
-        -- print("disabled.")
     end
 end
 
@@ -224,10 +211,8 @@ OtherSection:AddToggle({
         -- Your Auto Truck Trip code here
         if state then
             teleportEnabled = true
-            -- print("Toggle On")
         else
             teleportEnabled = false
-            -- print("Toggle Off")
         end
     end
 })
@@ -272,7 +257,6 @@ spawn(function()
                 teleportTimer = 48
             else
                 teleportTimer = teleportTimer - 1
-                -- print(teleportTimer)
             end
         end
         wait(1)
