@@ -29,6 +29,7 @@ MainSection:AddSlider({
 })
 
 
+
 local Truck = Window:MakeTab({Name = "Truck", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local Truckection = Truck:AddSection({Name = "Truck"})
 
@@ -267,6 +268,20 @@ spawn(function()
         wait(1)
     end
 end)
+
+-- Bagian untuk menambahkan tombol mobil
+local dealerList = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist["Komersial"]
+local CarSection = Window:MakeTab({Name = "Cars", Icon = "rbxassetid://4483345998", PremiumOnly = false}):AddSection({Name = "Cars"})
+
+for _, car in ipairs(dealerList:GetChildren()) do
+    CarSection:AddButton({
+        Name = car.Name,
+        Callback = function()
+            print(car.Name .. " button clicked")
+            -- Anda bisa menambahkan fungsi yang diinginkan di sini
+        end
+    })
+end
 
 -- Call the Orion Library's Init function to finish setting up the UI
 Library:Init()
