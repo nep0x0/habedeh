@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 2", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 3", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -278,7 +278,7 @@ for _, dealer in ipairs(dealerContainer:GetChildren()) do
     -- Membuat daftar nama mobil untuk dealer ini
     local carNames = {}
     for _, car in ipairs(dealer:GetChildren()) do
-        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") then
+        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("Limited") and car.Frame.Type.Limited.Visible then
             table.insert(carNames, car.Frame.CarName.Text)
         end
     end
