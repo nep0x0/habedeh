@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.0", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -269,18 +269,22 @@ spawn(function()
     end
 end)
 
--- Bagian untuk menambahkan tombol mobil
-local dealerList = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist["Komersial"]
+local dealerList = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist.Komersial
 local CarSection = Window:MakeTab({Name = "Cars", Icon = "rbxassetid://4483345998", PremiumOnly = false}):AddSection({Name = "Cars"})
 
 for _, car in ipairs(dealerList:GetChildren()) do
-    CarSection:AddButton({
-        Name = car.Name,
-        Callback = function()
-            -- Anda bisa menambahkan fungsi yang diinginkan di sini
-        end
-    })
+    if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") then
+        local carName = car.Frame.CarName.Text
+        CarSection:AddButton({
+            Name = carName,
+            Callback = function()
+                -- Anda bisa menambahkan fungsi yang diinginkan di sini
+            end
+        })
+    end
 end
+
+
 
 -- Call the Orion Library's Init function to finish setting up the UI
 Library:Init()
