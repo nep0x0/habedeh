@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 1", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -288,7 +288,6 @@ CarSection:AddDropdown({
     Default = carNames[1],
     Options = carNames,
     Callback = function(Value)
-        print(Value .. " selected")
         -- Anda bisa menambahkan fungsi yang diinginkan di sini
     end
 })
@@ -300,7 +299,6 @@ CarSection:AddTextbox({
         -- Mencari mobil dengan nama yang cocok
         for _, carName in ipairs(carNames) do
             if string.match(carName:lower(), Value:lower()) then
-                print("Found car: " .. carName)
                 -- Anda bisa menambahkan fungsi yang diinginkan di sini
             end
         end
