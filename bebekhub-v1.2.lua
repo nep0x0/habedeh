@@ -269,20 +269,44 @@ spawn(function()
     end
 end)
 
+--baru
+
 local dealerList = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist.Komersial
 local CarSection = Window:MakeTab({Name = "Cars", Icon = "rbxassetid://4483345998", PremiumOnly = false}):AddSection({Name = "Cars"})
 
+-- Membuat daftar nama mobil
+local carNames = {}
 for _, car in ipairs(dealerList:GetChildren()) do
     if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") then
-        local carName = car.Frame.CarName.Text
-        CarSection:AddButton({
-            Name = carName,
-            Callback = function()
-                -- Anda bisa menambahkan fungsi yang diinginkan di sini
-            end
-        })
+        table.insert(carNames, car.Frame.CarName.Text)
     end
 end
+
+-- Membuat dropdown dengan nama mobil
+CarSection:AddDropdown({
+    Name = "Cars",
+    Default = carNames[1],
+    Options = carNames,
+    Callback = function(Value)
+        print(Value .. " selected")
+        -- Anda bisa menambahkan fungsi yang diinginkan di sini
+    end
+})
+
+-- Membuat fitur pencarian
+CarSection:AddTextbox({
+    Name = "Search",
+    Callback = function(Value)
+        -- Mencari mobil dengan nama yang cocok
+        for _, carName in ipairs(carNames) do
+            if string.match(carName:lower(), Value:lower()) then
+                print("Found car: " .. carName)
+                -- Anda bisa menambahkan fungsi yang diinginkan di sini
+            end
+        end
+    end
+})
+--
 
 
 
