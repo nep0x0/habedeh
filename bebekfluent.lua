@@ -6,7 +6,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Bebek Hub v1.2.1 Beta 9",
+    Title = "Bebek Hub v1.2.1 Fluent 9",
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -119,10 +119,59 @@ Other:AddButton({
     end
 })
 
--- Your spawn function here...
+-- Spawn function
+spawn(function()
+    while true do
+        if teleportEnabled then
+            if teleportTimer <= 0 then
+                local waypointFolder = game:GetService("Workspace").Etc.Waypoint
+                if waypointFolder then
+                    local waypoint = waypointFolder.Waypoint
+                    if waypoint then
+                        local textLabel = waypoint.BillboardGui.TextLabel
 
---dealer
--- Your dealer code here...
+                        local waypointDestination = GetWaypointDestination(textLabel.Text)
+                        if waypointDestination then
+                            TeleportToDestination(waypointDestination)
+                        end
+                    end
+                end
+
+                teleportTimer = 48
+            else
+                teleportTimer = teleportTimer - 1
+            end
+        end
+        wait(1)
+    end
+end)
+
+-- Dealer code
+local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+local CarSection = Window:AddTab({ Title = "Cars", Icon = "" })
+
+for _, dealer in ipairs(dealerContainer:GetChildren()) do
+    -- Membuat daftar nama mobil dan harga untuk dealer ini
+    local carNamesAndPrices = {}
+    for _, car in ipairs(dealer:GetChildren()) do
+        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+            local carName = car.Frame.CarName.Text
+            local carPrice = car.Frame.Price.Text
+            table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
+        end
+    end
+
+    -- Membuat dropdown dengan nama mobil dan harga untuk dealer ini
+    CarSection:AddDropdown({
+        Title = dealer.Name,
+        Values = carNamesAndPrices,
+        Multi = false,
+        Default = 1,
+        Callback = function(Value)
+            -- Anda bisa menambahkan fungsi yang diinginkan di sini
+        end
+    })
+end
 
 -- Call the Fluent Library's Init function to finish setting up the UI
 Fluent:Init()
