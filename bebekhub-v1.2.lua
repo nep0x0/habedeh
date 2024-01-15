@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 7", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 8", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
