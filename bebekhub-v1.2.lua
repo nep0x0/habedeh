@@ -246,12 +246,17 @@ spawn(function()
     while true do
         if teleportEnabled then
             if teleportTimer <= 0 then
-                local waypoint = game:GetService("Workspace").Etc.Waypoint.Waypoint
-                local textLabel = waypoint.BillboardGui.TextLabel
+                local waypointFolder = game:GetService("Workspace").Etc.Waypoint
+                if waypointFolder then
+                    local waypoint = waypointFolder.Waypoint
+                    if waypoint then
+                        local textLabel = waypoint.BillboardGui.TextLabel
 
-                local waypointDestination = GetWaypointDestination(textLabel.Text)
-                if waypointDestination then
-                    TeleportToDestination(waypointDestination)
+                        local waypointDestination = GetWaypointDestination(textLabel.Text)
+                        if waypointDestination then
+                            TeleportToDestination(waypointDestination)
+                        end
+                    end
                 end
 
                 teleportTimer = 48
