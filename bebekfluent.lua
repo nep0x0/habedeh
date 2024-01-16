@@ -21,22 +21,6 @@ local Tabs = {
 local Options = Fluent.Options
 
 do
-    Fluent:Notify({
-        Title = "Aktif Bos",
-        Content = "Udah Aktif Ya Bos",
-        SubContent = "SubContent", -- Optional
-        Duration = 5 -- Set to nil to make the notification not disappear
-    })
-
-
-
-    Tabs.Main:AddParagraph({
-        Title = "Paragraph",
-        Content = "This is a paragraph.\nSecond line!"
-    })
-
-
-
     Tabs.Main:AddButton({
         Title = "Button",
         Description = "Very important button",
