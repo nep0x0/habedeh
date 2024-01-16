@@ -232,55 +232,54 @@ do
     -- end
 
 
-    local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+    -- local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
     
+    -- for _, dealer in ipairs(dealerContainer:GetChildren()) do
+    --     local carNamesAndCodes = {}
+    --     for _, car in ipairs(dealer:GetChildren()) do
+    --         if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+    --             local carName = car.Frame.CarName.Text
+    --             local carPrice = car.Frame.Price.Text
+    --             local carDisplayName = carName .. " (" .. carPrice .. ")"
+    --             carNamesAndCodes[carDisplayName] = car.Name
+    --         end
+    --     end
     
-    for _, dealer in ipairs(dealerContainer:GetChildren()) do
-        local carNamesAndCodes = {}
-        for _, car in ipairs(dealer:GetChildren()) do
-            if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
-                local carName = car.Frame.CarName.Text
-                local carPrice = car.Frame.Price.Text
-                local carDisplayName = carName .. " (" .. carPrice .. ")"
-                carNamesAndCodes[carDisplayName] = car.Name
-            end
-        end
-    
-        CarTab:AddDropdown(dealer.Name, {
-            Title = dealer.Name,
-            Values = carNamesAndCodes,
-            Multi = false,
-            Default = 1,
-            Callback = function(Value)
-                -- Munculkan dialog konfirmasi
-                Window:Dialog({
-                    Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda ingin membeli " .. Value .. "?",
-                    Buttons = {
-                        {
-                            Title = "Ya",
-                            Callback = function()
-                                -- Kode untuk membeli mobil di sini
-                                local args = {
-                                    [1] = "Buy",
-                                    [2] = carNamesAndCodes[Value], -- Menggunakan kode mobil yang dipilih pengguna
-                                    [3] = "White", -- Ganti dengan warna yang sesuai
-                                    [4] = dealer.Name -- Ganti dengan dealer yang sesuai
-                                }
-                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
-                            end
-                        },
-                        {
-                            Title = "Tidak",
-                            Callback = function()
-                                -- Kode jika pengguna memilih "Tidak"
-                            end
-                        }
-                    }
-                })
-            end
-        })
-    end
+    --     CarTab:AddDropdown(dealer.Name, {
+    --         Title = dealer.Name,
+    --         Values = carNamesAndCodes,
+    --         Multi = false,
+    --         Default = 1,
+    --         Callback = function(Value)
+    --             -- Munculkan dialog konfirmasi
+    --             Window:Dialog({
+    --                 Title = "Konfirmasi Pembelian",
+    --                 Content = "Apakah Anda ingin membeli " .. Value .. "?",
+    --                 Buttons = {
+    --                     {
+    --                         Title = "Ya",
+    --                         Callback = function()
+    --                             -- Kode untuk membeli mobil di sini
+    --                             local args = {
+    --                                 [1] = "Buy",
+    --                                 [2] = carNamesAndCodes[Value], -- Menggunakan kode mobil yang dipilih pengguna
+    --                                 [3] = "White", -- Ganti dengan warna yang sesuai
+    --                                 [4] = dealer.Name -- Ganti dengan dealer yang sesuai
+    --                             }
+    --                             game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
+    --                         end
+    --                     },
+    --                     {
+    --                         Title = "Tidak",
+    --                         Callback = function()
+    --                             -- Kode jika pengguna memilih "Tidak"
+    --                         end
+    --                     }
+    --                 }
+    --             })
+    --         end
+    --     })
+    -- end
     
 
 end
