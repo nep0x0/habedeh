@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Kohvcengas " .. Fluent.Version,
+    Title = "adfa " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -229,51 +229,7 @@ do
     --         Default = "--",
     --     })
     -- end
-    local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
-    local CarTab = Window:AddTab({Title = "Cars", Icon = ""})
-    
-    for _, dealer in ipairs(dealerContainer:GetChildren()) do
-        local carCodes = {}
-        for _, car in ipairs(dealer:GetChildren()) do
-            table.insert(carCodes, car.Name)
-        end
-    
-        CarTab:AddDropdown(dealer.Name, {
-            Title = dealer.Name,
-            Values = carCodes,
-            Multi = false,
-            Default = 1,
-            Callback = function(Value)
-                -- Munculkan dialog konfirmasi
-                Window:Dialog({
-                    Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda ingin membeli " .. Value .. "?",
-                    Buttons = {
-                        {
-                            Title = "Ya",
-                            Callback = function()
-                                -- Kode untuk membeli mobil di sini
-                                local args = {
-                                    [1] = "Buy",
-                                    [2] = Value, -- Menggunakan kode mobil yang dipilih pengguna
-                                    [3] = "White", -- Ganti dengan warna yang sesuai
-                                    [4] = dealer.Name -- Ganti dengan dealer yang sesuai
-                                }
-                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
-                            end
-                        },
-                        {
-                            Title = "Tidak",
-                            Callback = function()
-                                -- Kode jika pengguna memilih "Tidak"
-                            end
-                        }
-                    }
-                })
-            end
-        })
-    end
-    
+
 
 
 
