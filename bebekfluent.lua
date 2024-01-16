@@ -205,10 +205,14 @@ do
             if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
-                table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
+                local carCode = ""
+                if car and car:FindFirstChild("Properties") and car.Properties:FindFirstChild("Name") then
+                    carCode = car.Properties.Name.Value
+                end
+                table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ", " .. carCode .. ")")
             end
         end
-
+    
         Tabs.CarSection:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
@@ -216,6 +220,7 @@ do
             Default = 1,
         })
     end
+    
     
     
     
