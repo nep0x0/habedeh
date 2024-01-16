@@ -15,7 +15,7 @@ local Window = Fluent:CreateWindow({
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    CarTab = Window:AddTab({Title = "Cars", Icon = ""}),
+    CarSection = Window:AddTab({ Title = "Cars", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -198,8 +198,7 @@ do
     Slider:SetValue(16)
 
     local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
-    local CarTab = Window:AddTab({Title = "Cars", Icon = ""})
-    
+
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
         for _, car in ipairs(dealer:GetChildren()) do
@@ -209,40 +208,12 @@ do
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
             end
         end
-    
-        CarTab:AddDropdown(dealer.Name, {
+
+        Tabs.CarSection:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
             Multi = false,
             Default = 1,
-            Callback = function(Value)
-                -- Munculkan dialog konfirmasi
-                Window:Dialog({
-                    Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda ingin membeli " .. Value .. "?",
-                    Buttons = {
-                        {
-                            Title = "Ya",
-                            Callback = function()
-                                -- Kode untuk membeli mobil di sini
-                                local args = {
-                                    [1] = "Buy",
-                                    [2] = Value, -- Menggunakan kode mobil yang dipilih pengguna
-                                    [3] = "White", -- Ganti dengan warna yang sesuai
-                                    [4] = "Premium" -- Ganti dengan tipe yang sesuai
-                                }
-                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
-                            end
-                        },
-                        {
-                            Title = "Tidak",
-                            Callback = function()
-                                -- Kode jika pengguna memilih "Tidak"
-                            end
-                        }
-                    }
-                })
-            end
         })
     end
     
