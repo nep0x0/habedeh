@@ -15,6 +15,7 @@ local Window = Fluent:CreateWindow({
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Dealerships = Window:AddTab({ Title = "Dealerships", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -68,8 +69,6 @@ do
 
     Options.MyToggle:SetValue(false)
 
-
-    
     local Slider = Tabs.Main:AddSlider("Slider", {
         Title = "Walkspeed",
         Description = "This is a Walkspeed",
@@ -88,9 +87,8 @@ do
 
     Slider:SetValue(16)
 
-
-
-    local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
+    --dealer tab
+    local Dropdown = Tabs.Dealerships:AddDropdown("Dropdown", {
         Title = "Dropdown",
         Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
         Multi = false,
@@ -103,7 +101,7 @@ do
         --print("Dropdown changed:", Value)
     end)
 
-    local Input = Tabs.Main:AddInput("Input", {
+    local Input = Tabs.Dealerships:AddInput("Input", {
         Title = "Input",
         Default = "Default",
         Placeholder = "Placeholder",
@@ -117,6 +115,7 @@ do
     Input:OnChanged(function()
         --print("Input updated:", Input.Value)
     end)
+
 end
 
 
