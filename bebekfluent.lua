@@ -201,51 +201,19 @@ do
 
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
-        local code = {}
         for _, car in ipairs(dealer:GetChildren()) do
             if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
-                local code = car.Name
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
-                table.insert(code, carName .. " (" .. carPrice .. ")")
             end
         end
-    
+
         Tabs.CarSection:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
-            carCode = code,
             Multi = false,
             Default = 1,
-            Callback = function(Value)
-                -- Munculkan dialog konfirmasi
-                Window:Dialog({
-                    Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda yakin ingin membeli " .. Value .. "?",
-                    Buttons = {
-                        {
-                            Title = "Ya",
-                            Callback = function()
-                                -- Kode untuk membeli mobil di sini
-                                local args = {
-                                    [1] = "Buy",
-                                    [2] = carCode, -- Menggunakan kode mobil yang dipilih pengguna
-                                    [3] = "White", -- Ganti dengan warna yang sesuai
-                                    [4] = dealer.Name -- Ganti dengan dealer yang sesuai
-                                }
-                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
-                            end
-                        },
-                        {
-                            Title = "Tidak",
-                            Callback = function()
-                                -- Kode jika pengguna memilih "Tidak"
-                            end
-                        }
-                    }
-                })
-            end
         })
     end
     
