@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "oyoyoy " .. Fluent.Version,
+    Title = "Kohvceng " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -211,7 +211,27 @@ do
     --     --print("Dropdown changed:", Value)
     -- end)
 
+    -- local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+
+    -- for _, dealer in ipairs(dealerContainer:GetChildren()) do
+    --     local carNamesAndPrices = {}
+    --     for _, car in ipairs(dealer:GetChildren()) do
+    --         if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+    --             local carName = car.Frame.CarName.Text
+    --             local carPrice = car.Frame.Price.Text
+    --             table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
+    --         end
+    --     end
+
+    --     Tabs.CarSection:AddDropdown(dealer.Name, {
+    --         Title = dealer.Name,
+    --         Values = carNamesAndPrices,
+    --         Multi = false,
+    --         Default = "--",
+    --     })
+    -- end
     local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+    local CarTab = Window:AddTab({Title = "Cars", Icon = ""})
 
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
@@ -223,14 +243,42 @@ do
             end
         end
 
-        Tabs.CarSection:AddDropdown(dealer.Name, {
+        CarTab:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
             Multi = false,
             Default = 1,
+            Callback = function(Value)
+                -- Munculkan dialog konfirmasi
+                Window:Dialog({
+                    Title = "Konfirmasi Pembelian",
+                    Content = "Apakah Anda ingin membeli " .. Value .. "?",
+                    Buttons = {
+                        {
+                            Title = "Ya",
+                            Callback = function()
+                                -- Kode untuk membeli mobil di sini
+                                local args = {
+                                    [1] = "Buy",
+                                    [2] = Value, -- Menggunakan kode mobil yang dipilih pengguna
+                                    [3] = "White", -- Ganti dengan warna yang sesuai
+                                    [4] = "Premium" -- Ganti dengan tipe yang sesuai
+                                }
+                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
+                            end
+                        },
+                        {
+                            Title = "Tidak",
+                            Callback = function()
+                                -- Kode jika pengguna memilih "Tidak"
+                            end
+                        }
+                    }
+                })
+            end
         })
     end
-    
+
 
 
 end
