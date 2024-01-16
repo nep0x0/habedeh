@@ -65,9 +65,9 @@ end
 
 do
     --auto truck
-    local Toggle = Tabs.Main:AddToggle("AutoTruck", {Title = "Auto Job Truck", Default = false })
+    local ToggleAutoTruck = Tabs.Main:AddToggle("AutoTruck", {Title = "Auto Job Truck", Default = false })
 
-    Toggle:OnChanged(function()
+    ToggleAutoTruck:OnChanged(function()
         Callback = function(state)
             if state then
                 local args = {[1] = "Truck"}
@@ -143,17 +143,17 @@ do
         end
     end)
 
-    Options.AutoTruck:SetValue(false)
+    Options.ToggleAutoTruck:SetValue(false)
     --auto truck end
 
     --anti afk
-    local Toggle = Tabs.Main:AddToggle("AntiAfk", {Title = "Anti Afk", Default = false })
+    local ToggleAntiAfk = Tabs.Main:AddToggle("AntiAfk", {Title = "Anti Afk", Default = false })
 
-    Toggle:OnChanged(function()
+    ToggleAntiAfk:OnChanged(function()
         
     end)
 
-    Options.AntiAfk:SetValue(false)
+    Options.ToggleAntiAfk:SetValue(false)
     --anti afk end
 
     local Slider = Tabs.Main:AddSlider("Slider", {
