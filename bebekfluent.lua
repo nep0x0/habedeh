@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Kamvang " .. Fluent.Version,
+    Title = "Kohvceng " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -15,7 +15,7 @@ local Window = Fluent:CreateWindow({
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Dealerships = Window:AddTab({ Title = "Dealerships", Icon = "" }),
+    CarSection = Window:AddTab({ Title = "Cars", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -198,18 +198,40 @@ do
     Slider:SetValue(16)
 
     --dealer tab
-    local Dropdown = Tabs.Dealerships:AddDropdown("Dropdown", {
-        Title = "Dropdown",
-        Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
-        Multi = false,
-        Default = 1,
-    })
+    -- local Dropdown = Tabs.Dealerships:AddDropdown("Dropdown", {
+    --     Title = "Dropdown",
+    --     Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+    --     Multi = false,
+    --     Default = 1,
+    -- })
 
-    Dropdown:SetValue("four")
+    -- Dropdown:SetValue("four")
 
-    Dropdown:OnChanged(function(Value)
-        --print("Dropdown changed:", Value)
-    end)
+    -- Dropdown:OnChanged(function(Value)
+    --     --print("Dropdown changed:", Value)
+    -- end)
+
+    local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+    
+
+    for _, dealer in ipairs(dealerContainer:GetChildren()) do
+        local carNamesAndPrices = {}
+        for _, car in ipairs(dealer:GetChildren()) do
+            if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+                local carName = car.Frame.CarName.Text
+                local carPrice = car.Frame.Price.Text
+                table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
+            end
+        end
+
+        CarSection:AddDropdown(dealer.Name, {
+            Title = dealer.Name,
+            Values = carNamesAndPrices,
+            Multi = false,
+            Default = 1,
+        })
+    end
+
 
 end
 
