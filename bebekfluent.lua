@@ -21,6 +21,7 @@ local Tabs = {
 
 local Options = Fluent.Options
 
+-----tp
 local function TeleportToDestination(destination)
     -- Your teleport function here
     local Players = game:GetService("Players")
@@ -60,14 +61,100 @@ local function GetWaypointDestination(waypoint)
     return destinations[waypoint]
 end
 
+spawn(function()
+    while true do
+        if teleportEnabled then
+            if teleportTimer <= 0 then
+                local waypointFolder = game:GetService("Workspace").Etc.Waypoint
+                if waypointFolder then
+                    local waypoint = waypointFolder.Waypoint
+                    if waypoint then
+                        local textLabel = waypoint.BillboardGui.TextLabel
+
+                        local waypointDestination = GetWaypointDestination(textLabel.Text)
+                        if waypointDestination then
+                            TeleportToDestination(waypointDestination)
+                        end
+                    end
+                end
+
+                teleportTimer = 48
+            else
+                teleportTimer = teleportTimer - 1
+            end
+        end
+        wait(1)
+    end
+end)
+
+--tp end
+
 do
-    local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Job Truck", Default = false })
+    --auto truck
+    local Toggle = Tabs.Main:AddToggle("AutoTruck", {Title = "Auto Job Truck", Default = false })
 
     Toggle:OnChanged(function()
-        --code autojob
+        Callback = function(state)
+            if state then
+                local args = {[1] = "Truck"}
+                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+                wait(2)
+                -- Teleport ke tempat yang diinginkan
+                -- game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21796, 1065, -26800))
+                game.Players.LocalPlayer.Character:MoveTo(Vector3.new( -21801, 1062, -26799))
+                -- Wait sebelum jatuh (hindari kematian akibat jatuh)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                wait(3)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                wait(1.5)
+                -- Press tombol "E"
+                game:GetService('VirtualInputManager'):SendKeyEvent(true,'E',false,uwu)
+                wait(0.2)
+                game:GetService('VirtualInputManager'):SendKeyEvent(false,'E',false,uwu)
+                wait(2)
+                -- Teleport spawn car
+                game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-21787, 1042, -26788))
+                wait(4)
+                -- spawn car
+                game:GetService('VirtualInputManager'):SendKeyEvent(true,'F',false,uwu)
+                wait(0.2)
+                game:GetService('VirtualInputManager'):SendKeyEvent(false,'F',false,uwu)
+                wait(8)
+                -- seat on drive
+                local vim = game:GetService('VirtualInputManager')
+                vim:SendKeyEvent(true, 'E', false, game)
+                wait(2)
+                vim:SendKeyEvent(true, 'E', false, game)
+                wait(1)
+                -- remove text
+                vim:SendKeyEvent(true, 'Q', false, game)
+                wait(0.2)
+                vim:SendKeyEvent(true, 'Q', false, game)
+    
+                -- work
+                teleportEnabled = true
+            else
+                local args = {[1] = "Unemployee"}
+                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Job"):FireServer(unpack(args))
+                -- work
+                teleportEnabled = false
+                teleportTimer = 48
+            end
+        end
     end)
 
-    Options.MyToggle:SetValue(false)
+    Options.AutoTruck:SetValue(false)
+    --auto truck end
+
+    --anti afk
+    local Toggle = Tabs.Main:AddToggle("AntiAfk", {Title = "Auto Job Truck", Default = false })
+
+    Toggle:OnChanged(function()
+        
+    end)
+
+    Options.AntiAfk:SetValue(false)
+    --anti afk end
 
     local Slider = Tabs.Main:AddSlider("Slider", {
         Title = "Walkspeed",
