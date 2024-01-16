@@ -207,7 +207,7 @@ do
                 local carPrice = car.Frame.Price.Text
                 local carCode = ""
                 if car and car:FindFirstChild("Properties") and car.Properties:FindFirstChild("Name") then
-                    carCode = car.Properties.Name.Value
+                    carCode = car.Name
                 end
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ", " .. carCode .. ")")
             end
