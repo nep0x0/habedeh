@@ -198,6 +198,7 @@ do
     Slider:SetValue(16)
 
     local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+    local CarTab = Window:AddTab({Title = "Cars", Icon = ""})
     
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
