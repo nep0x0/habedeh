@@ -201,14 +201,12 @@ do
 
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
+
         for _, car in ipairs(dealer:GetChildren()) do
             if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
-                local carCode = ""
-                if car and car:FindFirstChild("Properties") and car.Properties:FindFirstChild("Name") then
-                    carCode = car.Name
-                end
+                local carCode = car.Name
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ", " .. carCode .. ")")
             end
         end
