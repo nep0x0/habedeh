@@ -214,6 +214,34 @@ do
             Values = carNamesAndPrices,
             Multi = false,
             Default = 1,
+            Callback = function(Value)
+                -- Munculkan dialog konfirmasi
+                Window:Dialog({
+                    Title = "Konfirmasi Pembelian",
+                    Content = "Apakah Anda ingin membeli " .. Value .. "?",
+                    Buttons = {
+                        {
+                            Title = "Ya",
+                            Callback = function()
+                                -- Kode untuk membeli mobil di sini
+                                local args = {
+                                    [1] = "Buy",
+                                    [2] = Value, -- Menggunakan kode mobil yang dipilih pengguna
+                                    [3] = "White", -- Ganti dengan warna yang sesuai
+                                    [4] = dealer.Name -- Ganti dengan dealer yang sesuai
+                                }
+                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
+                            end
+                        },
+                        {
+                            Title = "Tidak",
+                            Callback = function()
+                                -- Kode jika pengguna memilih "Tidak"
+                            end
+                        }
+                    }
+                })
+            end
         })
     end
     
