@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "1212 " .. Fluent.Version,
+    Title = "12d12 " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -239,32 +239,37 @@ do
             Multi = false,
             Default = 1,
             Callback = function(Value)
-                Window:Dialog({
-                    Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda yakin ingin membeli " .. Value.carName .. " dengan harga " .. Value.carPrice .. "?",
-                    Buttons = {
-                        {
-                            Title = "Ya",
-                            Callback = function()
-                                local args = {
-                                    [1] = "Buy",
-                                    [2] = Value.carCode,
-                                    [3] = "White",
-                                    [4] = dealer.Name
-                                }
-                                
-                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
-                            end
-                        },
-                        {
-                            Title = "Tidak",
-                            Callback = function()
-                                -- print("Pengguna memilih untuk tidak membeli " .. Value)
-                            end
+                if Value.carName and Value.carPrice and dealer.Name then
+                    Window:Dialog({
+                        Title = "Konfirmasi Pembelian",
+                        Content = "Apakah Anda yakin ingin membeli " .. Value.carName .. " dengan harga " .. Value.carPrice .. "?",
+                        Buttons = {
+                            {
+                                Title = "Ya",
+                                Callback = function()
+                                    local args = {
+                                        [1] = "Buy",
+                                        [2] = Value.carCode,
+                                        [3] = "White",
+                                        [4] = dealer.Name
+                                    }
+                                    
+                                    game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
+                                end
+                            },
+                            {
+                                Title = "Tidak",
+                                Callback = function()
+                                    -- print("Pengguna memilih untuk tidak membeli " .. Value.carName)
+                                end
+                            }
                         }
-                    }
-                })
+                    })
+                else
+                    print("Error: Salah satu dari Value.carName, Value.carPrice, atau dealer.Name adalah nil.")
+                end
             end
+            
         })
     end
     
