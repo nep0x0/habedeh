@@ -15,7 +15,7 @@ local Window = Fluent:CreateWindow({
 --Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    CarSection = Window:AddTab({ Title = "Cars", Icon = "" }),
+    CarTab = Window:AddTab({Title = "Dealer", Icon = ""})
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -208,8 +208,8 @@ do
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
             end
         end
-
-        Tabs.CarSection:AddDropdown(dealer.Name, {
+    
+        CarTab:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
             Multi = false,
@@ -228,7 +228,7 @@ do
                                     [1] = "Buy",
                                     [2] = Value, -- Menggunakan kode mobil yang dipilih pengguna
                                     [3] = "White", -- Ganti dengan warna yang sesuai
-                                    [4] = dealer.Name -- Ganti dengan dealer yang sesuai
+                                    [4] = "Premium" -- Ganti dengan tipe yang sesuai
                                 }
                                 game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
                             end
