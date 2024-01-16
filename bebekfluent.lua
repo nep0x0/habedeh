@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "dddddddddddddddddd " .. Fluent.Version,
+    Title = "EEEEEEEEEEEEE " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -202,9 +202,10 @@ do
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
         for _, car in ipairs(dealer:GetChildren()) do
-            if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+            if car and car.Name and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
+                local carCode = car.Name
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
             end
         end
@@ -226,7 +227,7 @@ do
                                 -- Kode untuk membeli mobil di sini
                                 local args = {
                                     [1] = "Buy",
-                                    [2] = Value, -- Menggunakan kode mobil yang dipilih pengguna
+                                    [2] = carCode, -- Menggunakan kode mobil yang dipilih pengguna
                                     [3] = "White", -- Ganti dengan warna yang sesuai
                                     [4] = dealer.Name -- Ganti dengan dealer yang sesuai
                                 }
