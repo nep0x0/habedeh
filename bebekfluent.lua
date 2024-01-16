@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "141414 " .. Fluent.Version,
+    Title = "ffff " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -104,7 +104,7 @@ local function enableAntiAFK()
 end
 --anti afk end
 
-local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+
 
 do
     --auto truck
@@ -219,60 +219,48 @@ do
     --     })
     -- end
     
-    local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
 
-    for _, dealer in ipairs(dealerContainer:GetChildren()) do
-        local carNamesAndPrices = {}
-    
-        for _, car in ipairs(dealer:GetChildren()) do
-            if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
-                local carName = car.Frame.CarName.Text
-                local carPrice = car.Frame.Price.Text
-                local carCode = car.Name
-                table.insert(carNamesAndPrices, {carName = carName, carPrice = carPrice, carCode = carCode})
-            end
+for _, dealer in ipairs(dealerContainer:GetChildren()) do
+    local carNamesAndPrices = {}
+
+    for _, car in ipairs(dealer:GetChildren()) do
+        if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+            local carName = car.Frame.CarName.Text
+            local carPrice = car.Frame.Price.Text
+            local carCode = car.Name
+            table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ", " .. carCode .. ")")
         end
-    
-        local Dropdown = Tabs.CarSection:AddDropdown(dealer.Name, {
-            Title = dealer.Name,
-            Values = carNamesAndPrices,
-            Multi = false,
-            Default = 1,
-            Callback = function(Value)
-                if Value.carName and Value.carPrice and dealer.Name then
-                    Window:Dialog({
-                        Title = "Konfirmasi Pembelian",
-                        Content = "Apakah Anda yakin ingin membeli " .. Value.carName .. " dengan harga " .. Value.carPrice .. "?",
-                        Buttons = {
-                            {
-                                Title = "Ya",
-                                Callback = function()
-                                    local args = {
-                                        [1] = "Buy",
-                                        [2] = Value.carCode,
-                                        [3] = "White",
-                                        [4] = dealer.Name
-                                    }
-                                    
-                                    game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
-                                end
-                            },
-                            {
-                                Title = "Tidak",
-                                Callback = function()
-                                    -- print("Pengguna memilih untuk tidak membeli " .. Value.carName)
-                                end
-                            }
-                        }
-                    })
-                else
-                    print("Error: Salah satu dari Value.carName, Value.carPrice, atau dealer.Name adalah nil.")
-                end
-            end
-            
-        })
     end
-    
+
+    local Dropdown = Tabs.CarSection:AddDropdown(dealer.Name, {
+        Title = dealer.Name,
+        Values = carNamesAndPrices,
+        Multi = false,
+        Default = 1,
+        Callback = function(Value)
+            Window:Dialog({
+                Title = "Konfirmasi Pembelian",
+                Content = "Apakah Anda yakin ingin membeli " .. Value .. "?",
+                Buttons = {
+                    {
+                        Title = "Ya",
+                        Callback = function()
+                            --print("Pengguna memilih untuk membeli " .. Value)
+                        end
+                    },
+                    {
+                        Title = "Tidak",
+                        Callback = function()
+                            --print("Pengguna memilih untuk tidak membeli " .. Value)
+                        end
+                    }
+                }
+            })
+        end
+    })
+end
+
     
     
 
@@ -284,24 +272,24 @@ end
 -- InterfaceManager (Allows you to have a interface managment system)
 
 -- Hand the library over to our managers
--- SaveManager:SetLibrary(Fluent)
--- InterfaceManager:SetLibrary(Fluent)
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
 
 -- Ignore keys that are used by ThemeManager.
 -- (we dont want configs to save themes, do we?)
--- SaveManager:IgnoreThemeSettings()
+SaveManager:IgnoreThemeSettings()
 
 -- You can add indexes of elements the save manager should ignore
--- SaveManager:SetIgnoreIndexes({})
+SaveManager:SetIgnoreIndexes({})
 
 -- use case for doing it this way:
 -- a script hub could have themes in a global folder
 -- and game configs in a separate folder per game
--- InterfaceManager:SetFolder("FluentScriptHub")
--- SaveManager:SetFolder("FluentScriptHub/specific-game")
+InterfaceManager:SetFolder("FluentScriptHub")
+SaveManager:SetFolder("FluentScriptHub/specific-game")
 
--- InterfaceManager:BuildInterfaceSection(Tabs.Settings)
--- SaveManager:BuildConfigSection(Tabs.Settings)
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
 
 
 Window:SelectTab(1)
@@ -314,4 +302,4 @@ Fluent:Notify({
 
 -- You can use the SaveManager:LoadAutoloadConfig() to load a config
 -- which has been marked to be one that auto loads!
--- SaveManager:LoadAutoloadConfig()
+SaveManager:LoadAutoloadConfig()
