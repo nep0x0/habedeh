@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "addfccccccccccc " .. Fluent.Version,
+    Title = "cccccccccccccccccccc " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -198,57 +198,24 @@ do
     Slider:SetValue(16)
 
     local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
-    local CarTab = Window:AddTab({Title = "Cars", Icon = ""})
-    
+
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
-        local carCodes = {}
         for _, car in ipairs(dealer:GetChildren()) do
             if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
-                local carDisplayName = carName .. " (" .. carPrice .. ")"
-                carNamesAndPrices[carDisplayName] = car.Name
-                table.insert(carCodes, carDisplayName)
+                table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
             end
         end
-    
-        CarTab:AddDropdown(dealer.Name, {
+
+        Tabs.CarSection:AddDropdown(dealer.Name, {
             Title = dealer.Name,
-            Values = carCodes,
+            Values = carNamesAndPrices,
             Multi = false,
             Default = 1,
-            Callback = function(Value)
-                -- Munculkan dialog konfirmasi
-                Window:Dialog({
-                    Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda ingin membeli " .. Value .. "?",
-                    Buttons = {
-                        {
-                            Title = "Ya",
-                            Callback = function()
-                                -- Kode untuk membeli mobil di sini
-                                local args = {
-                                    [1] = "Buy",
-                                    [2] = carNamesAndPrices[Value], -- Menggunakan kode mobil yang dipilih pengguna
-                                    [3] = "White", -- Ganti dengan warna yang sesuai
-                                    [4] = dealer.Name -- Ganti dengan dealer yang sesuai
-                                }
-                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
-                            end
-                        },
-                        {
-                            Title = "Tidak",
-                            Callback = function()
-                                -- Kode jika pengguna memilih "Tidak"
-                            end
-                        }
-                    }
-                })
-            end
         })
     end
-    
     
     
 
