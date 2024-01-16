@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "bobo " .. Fluent.Version,
+    Title = "oyoyoy " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -212,7 +212,7 @@ do
     -- end)
 
     local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
-    
+
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
         for _, car in ipairs(dealer:GetChildren()) do
@@ -222,8 +222,8 @@ do
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
             end
         end
-    
-        CarTab:AddDropdown(dealer.Name, {
+
+        Tabs.CarSection:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
             Multi = false,
