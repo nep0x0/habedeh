@@ -201,18 +201,21 @@ do
 
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
+        local code = {}
         for _, car in ipairs(dealer:GetChildren()) do
             if car and car.Name and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
-                local carCode = car.Name
+                local code = car.Name
                 table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ")")
+                table.insert(code, carName .. " (" .. carPrice .. ")")
             end
         end
     
         Tabs.CarSection:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
+            carCode = code,
             Multi = false,
             Default = 1,
             Callback = function(Value)
