@@ -61,32 +61,6 @@ local function GetWaypointDestination(waypoint)
     return destinations[waypoint]
 end
 
-spawn(function()
-    while true do
-        if teleportEnabled then
-            if teleportTimer <= 0 then
-                local waypointFolder = game:GetService("Workspace").Etc.Waypoint
-                if waypointFolder then
-                    local waypoint = waypointFolder.Waypoint
-                    if waypoint then
-                        local textLabel = waypoint.BillboardGui.TextLabel
-
-                        local waypointDestination = GetWaypointDestination(textLabel.Text)
-                        if waypointDestination then
-                            TeleportToDestination(waypointDestination)
-                        end
-                    end
-                end
-
-                teleportTimer = 48
-            else
-                teleportTimer = teleportTimer - 1
-            end
-        end
-        wait(1)
-    end
-end)
-
 --tp end
 
 do
@@ -143,11 +117,37 @@ do
         end
     end)
 
+    spawn(function()
+        while true do
+            if teleportEnabled then
+                if teleportTimer <= 0 then
+                    local waypointFolder = game:GetService("Workspace").Etc.Waypoint
+                    if waypointFolder then
+                        local waypoint = waypointFolder.Waypoint
+                        if waypoint then
+                            local textLabel = waypoint.BillboardGui.TextLabel
+    
+                            local waypointDestination = GetWaypointDestination(textLabel.Text)
+                            if waypointDestination then
+                                TeleportToDestination(waypointDestination)
+                            end
+                        end
+                    end
+    
+                    teleportTimer = 48
+                else
+                    teleportTimer = teleportTimer - 1
+                end
+            end
+            wait(1)
+        end
+    end)
+
     Options.AutoTruck:SetValue(false)
     --auto truck end
 
     --anti afk
-    local Toggle = Tabs.Main:AddToggle("AntiAfk", {Title = "Auto Job Truck", Default = false })
+    local Toggle = Tabs.Main:AddToggle("AntiAfk", {Title = "Anti Afk", Default = false })
 
     Toggle:OnChanged(function()
         
