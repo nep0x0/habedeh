@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Kohvceng " .. Fluent.Version,
+    Title = "babi " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -92,26 +92,19 @@ end)
 --tp end
 
 --anti afk
-local isAntiAFKEnabled = false -- Variable untuk mengetahui apakah "Anti AFK" diaktifkan
+local connection -- Variabel untuk menyimpan koneksi
 
 local function enableAntiAFK()
     local vu = game:GetService("VirtualUser")
-    game:GetService("Players").LocalPlayer.Idled:connect(function()
+    connection = game:GetService("Players").LocalPlayer.Idled:connect(function()
         vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
         wait(1)
         vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
     end)
 end
-
-local function toggleAntiAFK(state)
-    if state then
-        isAntiAFKEnabled = true
-        enableAntiAFK() -- Panggil fungsi untuk menjalankan "Anti AFK"
-    else
-        isAntiAFKEnabled = false
-    end
-end
 --anti afk end
+
+
 
 do
     --auto truck
@@ -169,13 +162,19 @@ do
     --auto truck end
 
     --anti afk
-    local ToggleAntiAfk = Tabs.Main:AddToggle("AntiAfk", {Title = "Anti Afk", Default = false })
+    local ToggleAntiAFK = Tabs.Main:AddToggle("AntiAFK", {Title = "Anti AFK", Default = false })
 
-    ToggleAntiAfk:OnChanged(function()
-        toggleAntiAFK
+    ToggleAntiAFK:OnChanged(function(state)
+        if state then
+            enableAntiAFK() -- Panggil fungsi untuk menjalankan "Anti AFK"
+        else
+            if connection then
+                connection:Disconnect() -- Memutuskan koneksi
+            end
+        end
     end)
-
-    Options.AntiAfk:SetValue(false)
+    
+    Options.AntiAFK:SetValue(false)
     --anti afk end
     
     --walkspeed
