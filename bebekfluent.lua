@@ -105,10 +105,6 @@ end
 --anti afk end
 
 
-local carNamesAndPrices = {}
-
-
-
 
 do
     --auto truck
@@ -226,7 +222,7 @@ do
 local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
 
 for _, dealer in ipairs(dealerContainer:GetChildren()) do
-    
+    local carNamesAndPrices = {}
 
     for _, car in ipairs(dealer:GetChildren()) do
         if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
