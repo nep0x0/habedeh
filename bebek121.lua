@@ -1,6 +1,6 @@
 -- Memuat library
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 10 recode", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 9 Dev Test 1", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 -- Mendapatkan layanan yang dibutuhkan
 local Players = game:GetService("Players")
