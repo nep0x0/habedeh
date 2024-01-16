@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 9 remove", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 9 dev 2", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -147,18 +147,6 @@ OtherSection:AddToggle({
     Callback = toggleAntiAFK
 })
 
-OtherSection:AddToggle({
-    Name = "Auto Truck Trip",
-    Callback = function(state)
-        -- Your Auto Truck Trip code here
-        if state then
-            teleportEnabled = true
-        else
-            teleportEnabled = false
-        end
-    end
-})
-
 --baru--
 OtherSection:AddButton({
     Name = "Hapus Map",
@@ -182,7 +170,6 @@ OtherSection:AddButton({
         end
     end
 })
-
 
 spawn(function()
     while true do
@@ -209,8 +196,6 @@ spawn(function()
         wait(1)
     end
 end)
-
-
 
 --dealer
 local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
