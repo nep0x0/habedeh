@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "kucing " .. Fluent.Version,
+    Title = "Kohvceng " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -22,6 +22,9 @@ local Tabs = {
 local Options = Fluent.Options
 
 -----tp
+local teleportEnabled = false
+local teleportTimer = 48
+
 local function TeleportToDestination(destination)
     -- Your teleport function here
     local Players = game:GetService("Players")
@@ -88,6 +91,28 @@ spawn(function()
 end)
 --tp end
 
+--anti afk
+local isAntiAFKEnabled = false -- Variable untuk mengetahui apakah "Anti AFK" diaktifkan
+
+local function enableAntiAFK()
+    local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+        vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        wait(1)
+        vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+end
+
+local function toggleAntiAFK(state)
+    if state then
+        isAntiAFKEnabled = true
+        enableAntiAFK() -- Panggil fungsi untuk menjalankan "Anti AFK"
+    else
+        isAntiAFKEnabled = false
+    end
+end
+--anti afk end
+
 do
     --auto truck
     local ToggleAutoTruck = Tabs.Main:AddToggle("AutoTruck", {Title = "Auto Job Truck", Default = false })
@@ -141,19 +166,19 @@ do
     end)
 
     Options.AutoTruck:SetValue(false)
-
     --auto truck end
 
     --anti afk
     local ToggleAntiAfk = Tabs.Main:AddToggle("AntiAfk", {Title = "Anti Afk", Default = false })
 
     ToggleAntiAfk:OnChanged(function()
-        
+        toggleAntiAFK
     end)
 
     Options.AntiAfk:SetValue(false)
     --anti afk end
-
+    
+    --walkspeed
     local Slider = Tabs.Main:AddSlider("Slider", {
         Title = "Walkspeed",
         Description = "This is a Walkspeed",
@@ -169,6 +194,7 @@ do
     Slider:OnChanged(function(Value)
         --print("Slider changed:", Value)
     end)
+    -- walk speed end
 
     Slider:SetValue(16)
 
