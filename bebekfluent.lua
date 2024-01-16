@@ -241,7 +241,7 @@ for _, dealer in ipairs(dealerContainer:GetChildren()) do
         Callback = function(Value)
             Window:Dialog({
                 Title = "Konfirmasi Pembelian",
-                Content = "Apakah Anda yakin ingin membeli " .. Value .. "?",
+                Content = "Apakah Anda yakin ingin membelis " .. Value .. "?",
                 Buttons = {
                     {
                         Title = "Ya",
