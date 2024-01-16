@@ -241,18 +241,25 @@ do
             Callback = function(Value)
                 Window:Dialog({
                     Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda yakin ingin membeli " .. Value .. "?",
+                    Content = "Apakah Anda yakin ingin membeli " .. Value.Name .. " dengan harga " .. Value.Price .. "?",
                     Buttons = {
                         {
                             Title = "Ya",
                             Callback = function()
-                                print("Pengguna memilih untuk membeli " .. Value)
+                                local args = {
+                                    [1] = "Buy",
+                                    [2] = Value.carCode,
+                                    [3] = "White",
+                                    [4] = dealer.Name
+                                }
+                                
+                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
                             end
                         },
                         {
                             Title = "Tidak",
                             Callback = function()
-                                print("Pengguna memilih untuk tidak membeli " .. Value)
+                                -- print("Pengguna memilih untuk tidak membeli " .. Value)
                             end
                         }
                     }
