@@ -197,11 +197,33 @@ do
 
     Slider:SetValue(16)
 
+    -- local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
+
+    -- for _, dealer in ipairs(dealerContainer:GetChildren()) do
+    --     local carNamesAndPrices = {}
+
+    --     for _, car in ipairs(dealer:GetChildren()) do
+    --         if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+    --             local carName = car.Frame.CarName.Text
+    --             local carPrice = car.Frame.Price.Text
+    --             local carCode = car.Name
+    --             table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ", " .. carCode .. ")")
+    --         end
+    --     end
+    
+    --     Tabs.CarSection:AddDropdown(dealer.Name, {
+    --         Title = dealer.Name,
+    --         Values = carNamesAndPrices,
+    --         Multi = false,
+    --         Default = 1,
+    --     })
+    -- end
+    
     local dealerContainer = game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Container.Dealership.Dealerlist
 
     for _, dealer in ipairs(dealerContainer:GetChildren()) do
         local carNamesAndPrices = {}
-
+    
         for _, car in ipairs(dealer:GetChildren()) do
             if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
@@ -211,14 +233,33 @@ do
             end
         end
     
-        Tabs.CarSection:AddDropdown(dealer.Name, {
+        local Dropdown = Tabs.CarSection:AddDropdown(dealer.Name, {
             Title = dealer.Name,
             Values = carNamesAndPrices,
             Multi = false,
             Default = 1,
+            Callback = function(Value)
+                Window:Dialog({
+                    Title = "Konfirmasi Pembelian",
+                    Content = "Apakah Anda yakin ingin membeli " .. Value .. "?",
+                    Buttons = {
+                        {
+                            Title = "Ya",
+                            Callback = function()
+                                print("Pengguna memilih untuk membeli " .. Value)
+                            end
+                        },
+                        {
+                            Title = "Tidak",
+                            Callback = function()
+                                print("Pengguna memilih untuk tidak membeli " .. Value)
+                            end
+                        }
+                    }
+                })
+            end
         })
     end
-    
     
     
     
