@@ -203,7 +203,7 @@ do
         local carNamesAndPrices = {}
         local code = {}
         for _, car in ipairs(dealer:GetChildren()) do
-            if car and car.Name and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
+            if car and car:FindFirstChild("Frame") and car.Frame:FindFirstChild("CarName") and car.Frame:FindFirstChild("Type") and car.Frame.Type:FindFirstChild("New") and car.Frame.Type.New.Visible and car.Frame:FindFirstChild("Price") then
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
                 local code = car.Name
