@@ -229,7 +229,7 @@ do
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
                 local carCode = car.Name
-                table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ", " .. carCode .. ")")
+                table.insert(carNamesAndPrices, {carName = carName, carPrice = carPrice, carCode = carCode})
             end
         end
     
