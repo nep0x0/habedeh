@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "babi " .. Fluent.Version,
+    Title = "Kamvang " .. Fluent.Version,
     SubTitle = "by dawid",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -209,21 +209,6 @@ do
 
     Dropdown:OnChanged(function(Value)
         --print("Dropdown changed:", Value)
-    end)
-
-    local Input = Tabs.Dealerships:AddInput("Input", {
-        Title = "Input",
-        Default = "Default",
-        Placeholder = "Placeholder",
-        Numeric = false, -- Only allows numbers
-        Finished = false, -- Only calls callback when you press enter
-        Callback = function(Value)
-            --print("Input changed:", Value)
-        end
-    })
-
-    Input:OnChanged(function()
-        --print("Input updated:", Input.Value)
     end)
 
 end
