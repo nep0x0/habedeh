@@ -229,7 +229,7 @@ do
                 local carName = car.Frame.CarName.Text
                 local carPrice = car.Frame.Price.Text
                 local carCode = car.Name
-                table.insert(carNamesAndPrices, {Name = carName, Price = carPrice, Code = carCode})
+                table.insert(carNamesAndPrices, carName .. " (" .. carPrice .. ", " .. carCode .. ")")
             end
         end
     
@@ -241,18 +241,25 @@ do
             Callback = function(Value)
                 Window:Dialog({
                     Title = "Konfirmasi Pembelian",
-                    Content = "Apakah Anda yakin ingin membeli " .. Value.Name .. " dengan harga " .. Value.Price .. " dan kode " .. Value.Code .. "?",
+                    Content = "Apakah Anda yakin ingin membeli " .. Value.carName .. " dengan harga " .. Value.carPrice .. "?",
                     Buttons = {
                         {
                             Title = "Ya",
                             Callback = function()
-                                print("Pengguna memilih untuk membeli " .. Value.Name)
+                                local args = {
+                                    [1] = "Buy",
+                                    [2] = Value.carCode,
+                                    [3] = "White",
+                                    [4] = dealer.Name
+                                }
+                                
+                                game:GetService("ReplicatedStorage"):WaitForChild("NetworkContainer"):WaitForChild("RemoteFunctions"):WaitForChild("Dealership"):InvokeServer(unpack(args))
                             end
                         },
                         {
                             Title = "Tidak",
                             Callback = function()
-                                print("Pengguna memilih untuk tidak membeli " .. Value.Name)
+                                -- print("Pengguna memilih untuk tidak membeli " .. Value)
                             end
                         }
                     }
@@ -260,7 +267,6 @@ do
             end
         })
     end
-    
     
     
     
