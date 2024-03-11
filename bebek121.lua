@@ -3,7 +3,7 @@ local teleportEnabled = false
 local teleportTimer = 48
 
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
-local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 9 dev 2", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
+local Window = Library:MakeWindow({Name = "Bebek Hub v1.2.1 Beta 9 dev 3", HidePremium = false, SaveConfig = true, ConfigFolder = "BebekHub"})
 
 local Main = Window:MakeTab({Name = "Main", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 local MainSection = Main:AddSection({Name = "Main"})
@@ -161,15 +161,28 @@ OtherSection:AddButton({
 })
 
 --baru
+-- OtherSection:AddButton({
+--     Name = "Hapus Trailer",
+--     Callback = function()
+--         local trailer = game:GetService("Workspace").Vehicles.deniautututuhsCar.Trailer1
+--         if trailer then
+--             trailer:Destroy()
+--         end
+--     end
+-- })
+
 OtherSection:AddButton({
     Name = "Hapus Trailer",
-    Callback = function()
-        local trailer = game:GetService("Workspace").Vehicles.deniautututuhsCar.Trailer1
-        if trailer then
-            trailer:Destroy()
+    Callback = function(player)
+        local username = player.Name -- Ganti dengan cara Anda mendapatkan nama pengguna
+        local vehicleName = username .. "sCar" -- Menambahkan "sCar" ke nama pengguna
+        local vehicle = game:GetService("Workspace").Vehicles[vehicleName]
+        if vehicle and vehicle.Trailer1 then
+            vehicle.Trailer1:Destroy()
         end
     end
 })
+
 
 spawn(function()
     while true do
