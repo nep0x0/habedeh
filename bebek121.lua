@@ -176,6 +176,29 @@ OtherSection:AddButton({
     end
 })
 
+OtherSection:AddButton({
+    Name = "Claim & Buy 5 Limited Box",
+    Callback = function()
+        local RS = game:GetService("ReplicatedStorage")
+        local NE = RS:WaitForChild("NetworkContainer"):WaitForChild("RemoteEvents"):WaitForChild("Box")
+
+        local args1 = {
+            [1] = "Claim"
+        }
+
+        NE:FireServer(unpack(args1))
+
+        local args2 = {
+            [1] = "Buy",
+            [2] = "Limited Box"
+        }
+
+        for i = 1, 5 do
+            NE:FireServer(unpack(args2))
+        end
+    end
+})
+
 
 spawn(function()
     while true do
